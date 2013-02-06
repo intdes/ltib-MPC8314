@@ -1,0 +1,88 @@
+%TOPICTITLE%
+---
+
+%TOC%
+
+---+ LTIB : Internal Freescale Specific Information
+
+---++ Getting the sources
+
+---+++ Clone the git repository
+<verbatim>
+$ git clone git://git.am.freescale.net/git/ltib.git
+</verbatim>
+
+---++ Commit the change
+---+++ Push permission
+Since *git commit* is a local operation, only *git push* operation could save your changes in the git repository.
+
+If you require push permission please email me at: Hong-Hua.Yin@freescale.com
+I will need to add you into git-ltib group on git.am.freescale.net to authorize you the 
+push permission to the ltib.git repository.
+
+The push permission is controled by git hooks script *update* and allowed-info file.
+Since the pusher name will not display in the git repository, the account policy is 
+one or two accounts for per-team or per-project.
+
+To request user account please use the following format:
+<verbatim>
+=====================================================
+USER NAME             LEADER                     SITE                   
+Vivienne Li(r66110)  White Weng(b18292)  DevTech Beijing 
+=====================================================
+</verbatim>
+
+Don't forget your git user information before commit.
+<verbatim>
+$ git config --global user.email "r66110@freescale.com"
+$ git config --global user.name "Vivienne Li"
+</verbatim>
+
+The push permission is fine-grained per-branch controled.
+Every user could create a new branch which is not limited.
+
+<verbatim>
+# $GIT_DIR/info/allowed-users
+#    file containing users allowed to commit on one branch. Each
+#    line contains a branch pattern followed by a list of user patterns
+#    (patterns are regular expressions, white space separated).
+#    Empty lines and comments (line starting with '#') are allowed.
+#    Rules are evaluated in-order and evaluation stops at first match.
+#    Branch patterns on which non-fast-forward is allowed must start with a
+#    '+'.
+
+# Administrator
+refs/heads/master                            yhh b20256 b18292
+
+# NPI IDC
+refs/heads/branch-mpc8323-.*                 b05022 b05799
+refs/heads/branch-p2020rdb-.*                b05022 b05799
+refs/heads/branch-mpc8358eoib-.*             b05022 b05799
+refs/heads/branch-p2020rdb-.*                b05022 b05799
+refs/heads/branch-swang-dpa-.*               b05022 b05799
+refs/heads/rel-mpc832x_rdb-.*                b05022 b05799
+refs/heads/rel-mpc8544ds-8-4-1-RAIDXOR       b05022 b05799
+refs/heads/branch-mpc8379erdb-RAID5-8-3-1    b05022 b05799
+
+# DevTech BJ
+refs/heads/branch-e500mc-.*                  r66110 b19537 b20826 b18292
+refs/heads/branch-mcf.*                      r66110 b19537 b20826 b18292
+refs/heads/branch-mpc512x.*                  r66110 b19537 b20826 b18292
+refs/heads/branch-mpc8572.*                  r66110 b19537 b20826 b18292
+refs/heads/branch-p4080.*                    r66110 b19537 b20826 b18292
+
+# DevTech SH
+refs/heads/branch-mpc8377.*                  b21500 b22923
+
+
+# MAD
+refs/heads/branch-imx-.*                     r80115 r65388
+
+# Public
+refs/heads/branch-.*                         .*
+</verbatim>
+---++ Internal mailing list
+
+http://sourceforge.freescale.net/mailman/listinfo/ltib-users
+---
+

@@ -1,0 +1,253 @@
+%TOPICTITLE%
+---
+
+<verbatim>
+Copyright ? Freescale Semiconductor, Inc. 2004-2009. All rights reserved.
+
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.2
+or any later version published by the Free Software Foundation;
+with no Invariant Sections, no Front-Cover Texts, and no Back-Cover
+Texts.  A copy of the license is included in the file doc/COPYING
+</verbatim>
+
+
+%TOC%
+
+---+ Introduction
+
+Here is a quick note on various techniques and best practices for maintaining
+LTIB BSP.
+
+
+---+ How to upgrade a BSP (i.e. not-maintenance).
+
+---++ Scenario
+
+A BSP exists for a target and some time has gone by.  Now you want to
+re-release that BSP, possibly adding new kernels, toolchains bootloaders etc.
+What should you do?
+
+---++ Which branch should I use
+
+After the last release of this BSP, the release team should have merged
+back from their branch into the master of git.  If this has not happened,
+you must do this first.  
+
+Now that some time has gone by and you are adding something new not
+so much  fixing a bug (even though that may be an indirect consequence)
+you should be working to start with on the HEAD of the master of git.
+
+Once you have added the new stuff and have it basically working, you should
+re-branch and follow the release process documented in LtibReleaseProcess
+
+
+---++ Principles
+
+   1. If we've released something before the selections
+   of kernel/bootloader/toolchain should still be available to users
+   2. Don't knowingly break older stuff.  
+   3. Newer is not always better (to everyone).  Some people really need
+   to have the old stuff available to them (even if it's not the default).
+
+
+---++ What should I do to add a new toolchain and kernel?
+
+---+++ General principles
+
+Lets say you have new toolchain and a new kernel that you want to
+upgrade people to.  Here's what to do:
+
+   * __ADD__ the new toolchain as the next one in the selection list.  
+   * __LEAVE__ the old toolchain tokens in place
+
+---+++ Example: adding a new toolchain
+
+In the patch below, here's an example showing how I added a new toolchain
+to the mpc832xemds platform:
+
+<verbatim>
+$ git diff
+diff --git a/config/platform/mpc832xemds/main.lkc b/config/platform/mpc832xemds/main.lkc
+index 4ad3021..4a6f234 100644
+--- a/config/platform/mpc832xemds/main.lkc
++++ b/config/platform/mpc832xemds/main.lkc
+@@ -64,6 +64,17 @@ choice
+               - e500v2        (te500v2)
+               - e600          (te600)
+               - soft float    (soft-float)
++    config TOOLCHAIN4
++        bool "gcc-4.2.1-elibc-2.5.82 NPTL" if GLIBC || LIBC_NONE || LIBC_HACKING
++        help
++            PowerPC gcc-4.2.1 eglibc-2.5.82 multilib NPTL thread libraries.
++            Toolchain built by CodeSourcery, release 82.
++            Library versions avaialble for:
++              - 603e          (default)
++              - e500v1        (te500v1)
++              - e500v2        (te500v2)
++              - e600          (te600)
++              - soft float    (soft-float)
+     config TOOLCHAIN_CUSTOM
+         bool "custom"
+ endchoice
+@@ -73,12 +84,14 @@ config TOOLCHAIN
+     default tc-mtwk-x86lnx-8325-3.4.3-1.i686.rpm if TOOLCHAIN1
+     default tc-fsl-x86lnx-e300c2-nptl-4.0.2-2.i386.rpm if TOOLCHAIN2
+     default freescale-powerpc-linux-gnu-4.1-78.i686.rpm if TOOLCHAIN3
++    default freescale-powerpc-linux-gnu-4.2-82.i686.rpm if TOOLCHAIN4
+
+ config TOOLCHAIN_PATH
+     string
+     default "/opt/mtwk/usr/local/gcc-3.4.3-e300-glibc-2.3.4/powerpc-8325-linux" if TOOLCHAIN1
+     default "/opt/freescale/usr/local/gcc-4.0.2-glibc-2.3.6-nptl-2/powerpc-e300c2-linux" if TOOLCHAIN2
+     default "/opt/freescale/usr/local/gcc-4.1.78-eglibc-2.5.78/powerpc-linux-gnu" if TOOLCHAIN3
++    default "/opt/freescale/usr/local/gcc-4.2.82-eglibc-2.5.82/powerpc-linux-gnu" if TOOLCHAIN4
+     string "Supply your toolchain path" if TOOLCHAIN_CUSTOM
+
+ config CUSTOM_TOOLCHAIN_PREFIX
+@@ -91,13 +104,13 @@ config TOOLCHAIN_PREFIX
+     string
+     default "powerpc-8325-linux-" if TOOLCHAIN1
+     default "powerpc-e300c2-linux-" if TOOLCHAIN2
+-    default "powerpc-linux-gnu-" if TOOLCHAIN3
++    default "powerpc-linux-gnu-" if TOOLCHAIN3 || TOOLCHAIN4
+     default CUSTOM_TOOLCHAIN_PREFIX if TOOLCHAIN_CUSTOM
+
+ config TOOLCHAIN_CFLAGS
+     string
+     default "-msoft-float" if TOOLCHAIN1 || TOOLCHAIN2
+-    default "-msoft-float -mcpu=e300c2" if TOOLCHAIN3
++    default "-msoft-float -mcpu=e300c2" if TOOLCHAIN3 || TOOLCHAIN4
+     string "Enter any CFLAGS for gcc/g++"
+     help
+         This option lets you set flags that will be passed to gcc/g++
+</verbatim>
+
+
+---+++ Example: adding a new kernel
+
+Here is an example that shows the addition of a new kernel to a target.
+
+First, here's the patch of the *main.lkc* file.  I've snipped it back
+to remove the hunks we're not interested in:
+
+<verbatim>
+$ git diff
+diff --git a/config/platform/mpc832xemds/main.lkc b/config/platform/mpc832xemds/main.lkc
+index 4ad37234..4a656f6 100644
+--- a/config/platform/mpc832xemds/main.lkc
++++ b/config/platform/mpc832xemds/main.lkc
+@@ -121,6 +121,8 @@
+         bool "2.4.27 (Analogue Micro Ltd)"
+     config KERNEL3
+         bool "2.6.16 (Analogue Micro Ltd)"
++    config KERNEL4
++        bool "kernel-8xx"
+     config KERNEL_DIR_BUILD
+         bool "Local Linux directory build"
+         help
+@@ -135,6 +137,7 @@
+     string
+     default "kernel-2.4.27-875"               if KERNEL1
+     default "kernel-2.6.16-875"               if KERNEL3
++    default "kernel-8xx"                      if KERNEL4
+     default "kernel26-dir-build"              if KERNEL_DIR_BUILD
+
+ source ../../userspace/kernel_dir_build.lkc
+@@ -153,6 +156,7 @@
+     string "kernel config"
+     default "linux-2.4.x-am_adder_87x.config" if KERNEL1
+     default "linux-2.6.16-am_adder_87x.config" if KERNEL3 || KERNEL_DIR_BUILD
++    default "linux-8xx-am_adder_87x.config" if KERNEL4
+
+ config PKG_KERNEL_WANT_CF
+     depends ! KERNEL_NONE
+</verbatim>
+
+Here's an explanation:
+
+   * Hunk '@@ -121,6 +121,8 @@' shows the new menu prompt under the kernel
+   choice list selection "kernel-8xx"
+
+   * Hunk '@@ -135,6 +137,7 @@' Shows that the new kernel (#4) will select
+   the spec file who's base name is "kernel-8xx" as the rpm spec file
+   that will be used in order to build the kernel.  It is this spec file
+   that references the source tarball and patches that belong to this kernel
+
+   * Hunk '@@ -153,6 +156,7 @@' Shows that the new kernel (#4) will select
+   the new linux .config file "linux-8xx-am_adder_87x.config"
+
+In addition to changing this main.lkc for this example I needed do the
+following:
+
+   * Create (maybe based on a copy) the *config* file:
+   config/platform/qs875s/linux-8xx-am_adder_87x.config
+
+   * Create (maybe based on a copy) the *spec* file:
+   dist/lfs-5.1/kernel/kernel-8xx.spec.in 
+
+---++ Remember to upload the content to the PPP
+
+Before you check-in changes to LTIB that reference new content
+(e.g. toolchains, source tarballs and patches), you must uploaded
+the to the PPP using this link: 
+http://auslxsc01.mtwk.freescale.net/ltib-cgi/ppp_upload.cgi
+
+
+---++ Pre-selecting the new stuff
+
+Having added your changes to main.lkc (leaving the old stuff in place), 
+and added any new config files, run:
+<verbatim>
+$ ./ltib --configure
+</verbatim>
+
+Make the changes you need to your overall configuration so that the BSP
+works with your updates as you require.  Your configuration points
+will now have been captured in:
+
+   * config/platform/&lt;target&gt;/defconfig.dev
+   * config/platform/&lt;target&gt;/&lt;linux_config_name&gt;.dev
+
+If you want to make your new overall configuraton the new default, move
+the config/platform/&lt;target&gt;/defconfig.dev to 
+config/platform/&lt;target&gt;/defconfig and check-in the update.
+
+If you have updated your new Linux configuration file, you should move
+this from the '.dev' name to a version without the '.dev'.  Normally
+this will be a new file, so you need to 'git add' it before checking
+it in to git.
+
+
+---++ Why is this important
+
+Imagine you're a poor user using git.  Your config is setup and you're
+working on (and happy with) a certain toolchain and kernel.  If someone
+changes the meaning of TOOLCHAIN1 or KERNEL1, when you do a git update,
+you'll be subjected to a situation whereby your current configuration is
+invalid.  Worse still the old selections you _WANTED_ have disappeared.
+How rude....
+
+This situation would likely lead to frustration by users and lots of
+extra support traffic.
+
+---++ Conclusion
+
+---+++ Dos
+
+   * Add new stuff
+   * Update the defconfig
+
+---+++ Donts
+
+   * Remove old stuff 
+
+---+++ Exceptions
+
+There are always exceptions, but please discuss first on the LTIB list
+if you are thinking that your case is an exception.
+
+----
+
+-- Main.StuartHughes 
+

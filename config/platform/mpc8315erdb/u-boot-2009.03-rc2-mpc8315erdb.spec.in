@@ -1,0 +1,44 @@
+# template = u-boot-common.tmpl
+
+%define pfx /opt/freescale/rootfs/%{_target_cpu}
+%define dversion rc2
+
+Summary         : Universal Bootloader firmware
+Name            : u-boot
+Version         : 2009.03
+Release         : 6
+License         : GPL V2
+Vendor          : Freescale Semiconductor
+Packager        : Jing Yang
+Group           : Applications/System
+Source          : %{name}-%{version}-%{dversion}.tar.bz2
+Patch1          : %{name}-%{version}-%{dversion}-nand-boot-support-for-mpc8315erdb.patch
+Patch2          : 0002-PCI-Express-support-for-mpc8315erdb-board.patch
+Patch3          : 0003-CodeWarrior-support-for-MPC83xx-boards.patch
+Patch4          : 0004-add-the-extra-config-for-core-clock-333-266MHz.patch
+Patch5          : %{name}-%{version}-%{dversion}-add-the-support-for-resume-of-deep-sleep.patch
+Patch6          : 0006-pcie-ep-for-mpc8315erdb.patch
+Patch7          : 0007-lfc-support-for-mpc8315erdb.patch
+Patch8          : 0008-add-ecc-off-config.patch
+Patch9          : %{name}-1.3.0-rt2-mpc8315erdb-scan-host-bridge.patch
+Patch10         : %{name}-%{version}-rc2-scan-all-the-devices-on-the-bus.patch
+Patch11         : %{name}-%{version}-rc2-mpc8315erdb-skip-PCI-controller-scan.patch
+BuildRoot       : %{_tmppath}/%{name}
+Prefix          : %{pfx}
+
+%Description
+%{summary}
+
+%Prep
+%setup -n %{name}-%{version}-%{dversion}
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
+%patch9 -p1
+%patch10 -p1
+%patch11 -p1

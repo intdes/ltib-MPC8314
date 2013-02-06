@@ -1,0 +1,125 @@
+%TOPICTITLE%
+---
+
+See also: LtibFaq and LtibPackagePool
+
+%TOC%
+
+---+ PPP review process/mechanics
+
+---++ Introduction
+
+Before reading this, you should have read the overview of the system
+here: LtibPackagePool
+
+If you have a tarball/file/patch that you want to distribute outside Freescale,
+it needs to be reviewed, approved and archived.  
+
+The purpose of this note is to describe the process in when using the  PPP review system
+
+
+---++ Step 1: Uploading
+
+To upload your file and capture some basic information to track its origins
+you should use the PPP upload script here:
+http://auslxsc01.mtwk.freescale.net/ltib-cgi/ppp_upload.cgi
+
+You are required to fill out the following:
+
+   * *Name*  Please put in your real name, not your coreid
+
+   * *Email* Please enter your Freescale email address
+
+   * *File to upload* Enter the path of the file you want to upload (or use the browse button)
+
+   * *Save as name* This is not normally used.  It allows you to save to a different name (for example if the original file contains spaces or shell meta characters.
+ 
+   * *License* This is important, enter the correct name of the license for the package you are using.  You can often find this by looking at the entry for the project at http://freshmeat.net/.  If you can't find it there, untar the package and look at the COPYING (or LICENSE) file.  If you can't find it there, ask on the LTIB mailing list (see LtibFaq).  Note that patches normally follow the license of the package they are patching, unless there is some other good reason.
+
+   * *Distribution*  Select the correct designation from the drop-down list:
+      * *For internal company use only*    : Internal use only
+      * *Only with with clickthru license* : Is covered by a click-thru license, normally this means you can only distribute on a Freescale BSP ISO image, where a user explicitly has to accept the license terms on installation
+      * *For restricted distribution only* : Only for limited distribution (Freescale BSP ISO for example).  This may not necessarily need a click-thru license
+      * *Intended to be public, but not yet* : This is usually open-source work that we don't yet want out publicly (for example un-announced kernel work).
+      * *Make this file publicly available* : This work is Open Source and we want it to be publicly copied to http://bitshrine.org/gpp once approved.  That is, there are no distribution restrictions.
+
+   * *Mark for review* Select the correct designation from the drop-down list:
+      * *Yes, this can be reviewed* : This means that if this file is caught by the review scripts, it will be included in the review list
+      * *No, exclude this from all reviews* : This means that this file will never be included in the review process.  This could be because someone wants to archive a file on the PPP, but never consider putting it outside Freescale or in a BSP.  
+
+   * *Please describe the file you are uploading* : This section is where you must enter some idea of what the file you uploading is for, or does.  This is to help the reviewers understand the purpose.  For example, if it is a patch to fix a memory leak in the package 'boa', say so.  Once you have describe what the file is, you then need to clearly state the origins of this work.  You *must* say who originated the patch, this needs to be the name of the individual and also (if appropriate) the organisation they work for.  If you got this work from the Internet or a mailing list, you *must* supply the URL of where this came from.  You *must* also for external material provide sufficient detail so that anyone else could reproduce exactly the same file using your examples.  So if your file was from a git tree, you must not only give the URL of that tree, but also the tag name or sha1.  Additionally, you should state (in the case of a tarball) the commands you used to generate it.  If the work you got from outside Freescale has in any way been modified (a derived patch etc), you must say so and who/why/what the changes were.  Finally for user originated work at Freescale , you should state explicitly that "the Copyright is owned by Freescale Semiconductor, Inc" 
+   
+Once all this is filled out, click the *Submit Query* button.
+
+What this will do is upload your file to the PPP server (see:
+http://auslxsc01.mtwk.freescale.net/ltib/).  The content will go into the PPP
+(http://auslxsc01.mtwk.freescale.net/ppp).  Additionally a md5sum file
+(_file_.md5) will be created for the file you uploaded, this is used to check
+integrity when downloading it.  
+
+Note also that the information you typed in will be captured and put into a
+file in the ppp_info area (http://auslxsc01.mtwk.freescale.net/ltib/ppp_info).
+These files are just the raw form information and not generally used by
+end-users, instead they are used by the PPP review script as a starting point
+for the actual user editable twiki pages.  This odd process exists due to IT
+infrastructure limitations (service accounts can't log into and create twiki
+pages).
+
+
+---++ Step 2: The review 
+
+---+++ General principles
+
+   * The script will auto-generate the initial editable twiki page from
+     the ppp_info file created on upload if it is missing
+
+   * The script will read the twiki page for each file and classify the
+     file, based on the current information int wiki page
+
+   * If a file is Approved, it will be copied to either the GPP staging 
+     area, or the CPP staging area (both are inside Freescale).  The
+     GPP is used for files approved for public distribution.  The CPP
+     is used for all others.   Files in the GPP staging area will be
+     copied out to http://bitshrine.org/gpp (once a week).  The files
+     in the CPP are available for inclusion in BSP ISO images, but
+     won't be copied to http://bitshrine.org/gpp.
+
+   * If a reviewer/user edits a wiki page to update some information,
+     this in itself changes nothing other than the wiki page.  If you
+     want a re-review, or if an approver changes the status, in order
+     for this to be re-classified and some action to happen, a user
+     must re-run the review script.
+
+---+++ If your files are not part of LTIB
+
+If your files are not part of LTIB, you must manually drive the review.  To do
+this, click on: https://auslxsc01.mtwk.freescale.net/ltib-scgi/ppp_review.cgi
+and select *Review file(s)* and click on *Choose*.  You will then be presented
+a form to fill out.  Enter your details and enter one filename per line for the
+files you want reviewed in the box that says *Files to review, enter one per
+line*  If you want an email to be sent to the PPP review mailing list, click
+the checkbox that says *Email the PPP review list* .  If you are emailing that
+list, enter a message in the *Message to reviewers* textbox.  When you've
+filled out the form, click on *Run*
+
+---+++ If your files are part of LTIB but not in the master branch of git
+
+You must manually drive the review.  To do this, click on:
+https://auslxsc01.mtwk.freescale.net/ltib-scgi/ppp_review.cgi and select
+*Review a branch* and click on *Choose*.  You will then be presented a form to
+fill out.  Enter your details and the name of the branch you want reviewed in
+*Branch:* (deleted the 'main trunk' text first). If you want an email to be
+sent to the PPP review mailing list, click the checkbox that says *Email the
+PPP review list* .  If you are emailing that list, enter a message in the
+*Message to reviewers* textbox.  When you've filled out the form, click on
+*Run*. 
+
+---+++ If your files are part of LTIB and in the master branch of git
+
+Once a week a scheduled run of the PPP reviews script is made by
+the PPP maintainer.  All files referenced from the master branch of LTIB
+git are automatically processed for review.
+
+---
+-- Main.StuartHughes
+

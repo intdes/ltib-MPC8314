@@ -1,0 +1,2610 @@
+
+
+
+Checking licensing and external availabity of sources
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following constraints/checks are enforced:
+
+1/ All source/patches in the default configuration must be distributable.
+
+2/ Any sources/patches not in the default configuration that are not
+distributable are not be copied to the ISO image.
+
+3/ Any content copied to the ISO image has it's md5 checksum verified by
+downloading a fresh copy of the md5sum file and using it to verify the
+content it checksums.
+
+4/ Files already present on local disk in the LPP will be used.  Any
+missing files will be downloaded from either the GPP staging area
+or the CPP (Clickthru) staging area.
+
+                  ------------------------
+
+
+Copying content from default configuration (mandatory)
+---------------------------------------------------------
+
+checking: toolchain
+====================
+Testing network connectivity
+OK GPP_STAGE: 
+OK CPP_STAGE: 
+
+OK GPP_STAGE: tc-fsl-x86lnx-e300c3-4.1.78-1.i386.rpm
+OK GPP_STAGE: tc-fsl-x86lnx-e300c3-4.1.78-1.src.rpm
+
+checking: fake-provides
+=========================
+License: GPL
+
+checking: u-boot-2009.03-rc2-mpc8315erdb
+==========================================
+License: GPL V2
+OK GPP_STAGE: u-boot-2009.03-rc2.tar.bz2
+OK GPP_STAGE: u-boot-2009.03-rc2-nand-boot-support-for-mpc8315erdb.patch
+OK GPP_STAGE: 0002-PCI-Express-support-for-mpc8315erdb-board.patch
+OK GPP_STAGE: 0003-CodeWarrior-support-for-MPC83xx-boards.patch
+OK GPP_STAGE: 0004-add-the-extra-config-for-core-clock-333-266MHz.patch
+OK GPP_STAGE: u-boot-2009.03-rc2-add-the-support-for-resume-of-deep-sleep.patch
+OK GPP_STAGE: 0006-pcie-ep-for-mpc8315erdb.patch
+OK GPP_STAGE: 0007-lfc-support-for-mpc8315erdb.patch
+OK GPP_STAGE: 0008-add-ecc-off-config.patch
+OK GPP_STAGE: u-boot-1.3.0-rt2-mpc8315erdb-scan-host-bridge.patch
+OK GPP_STAGE: u-boot-2009.03-rc2-scan-all-the-devices-on-the-bus.patch
+OK GPP_STAGE: u-boot-2009.03-rc2-mpc8315erdb-skip-PCI-controller-scan.patch
+
+checking: kernel-2.6.29.6-mpc8315erdb
+=======================================
+License: GPL V2
+OK GPP_STAGE: linux-2.6.29.6.tar.bz2
+OK GPP_STAGE: 0002-skb-for-mpc8315erdb.patch
+OK GPP_STAGE: 0003-pcie-support-for-mpc8315erdb.patch
+OK GPP_STAGE: 0004-adjust-parse_mtd_partitions.patch
+OK GPP_STAGE: 0005-Codewarrior-kernel-debug-for-mpc8315erdb.patch
+OK GPP_STAGE: kernel-2.6.29.6-power-management-support-for-mpc8315erdb.patch
+OK GPP_STAGE: 0007-fsl-sata-power-management-for-mpc8315erdb.patch
+OK GPP_STAGE: 0008-fsl-usb-power-management-for-mpc8315erdb.patch
+OK GPP_STAGE: linux-2.6.29.6-wakeup-by-GTM-timer4-for-mpc8315-PM-nort.patch
+OK GPP_STAGE: 0010-LFC-support-for-mpc8315erdb.patch
+OK GPP_STAGE: 0011-fixed-the-large-file-transfer-issue-of-sata.patch
+OK GPP_STAGE: linux-2.6.29.6-TDM-support-for-mpc8315erdb-nort.patch
+OK GPP_STAGE: linux-2.6.29.6-tdm-test-modules-for-mpc8315erdb-nort.patch
+OK GPP_STAGE: kernel-2.6.29.6-spi-support-for-the-tdm-module-of-mpc8315erdb.patch
+OK GPP_STAGE: 0015-pcie-ep-demo-support-for-mpc8315erdb.patch
+OK GPP_STAGE: kernel-2.6.29.6-ieee-1588-v1-driver-for-mpc8315erdb.patch
+OK GPP_STAGE: kernel-2.6.29.6-ieee-1588-v2-driver-for-mpc8315erdb.patch
+OK GPP_STAGE: linux-2.6.29.6-otg-support-for-mpc8315erdb-nort.patch
+OK GPP_STAGE: 0018-fix-a-bug-on-ehci_turn_off_all_ports.patch
+OK GPP_STAGE: 0019-sata_fsl-hard-and-soft-reset-split.patch
+OK GPP_STAGE: 0020-sata_fsl-Add-asynchronous-notification-support.patch
+OK GPP_STAGE: 0001-Add-Freescale-SEC23DRV-package.patch
+OK GPP_STAGE: 0022-port-SEC23DRV-to-linux-v2.6.z.patch
+OK GPP_STAGE: 0023-enable-SEC23DRV-for-mpc8315erdb.patch
+OK GPP_STAGE: 0024-DMA-XOR-support-for-mpc8315erdb.patch
+OK GPP_STAGE: 0025-USB-fslusb-Initialize-unused-endpoints-as-bulk.patch
+OK GPP_STAGE: 0026-yaffs2-support-for-mpc8315erdb.patch
+OK GPP_STAGE: kernel-2.6.29.6-the-DTS-support-for-mpc8315erdb.patch
+OK GPP_STAGE: kernel-2.6.29.6-fix-a-bug-of-Intel-PRO-1000-PCI-Express-Gigabit-Ethernet-driver.patch
+OK GPP_STAGE: kernel-2.6.29.6-add-usb-device-dts.patch
+OK GPP_STAGE: linux-2.6.29.6-mtd-eLBC-NAND-increase-bus-timeout-to-max.patch
+OK GPP_STAGE: linux-2.6.29.6-mtd-eLBC-NAND-use-recommended-cmd-sequences.patch
+OK GPP_STAGE: linux-2.6.29-MPC8315-Update-SKB-recycling-1.1.4-to-1.1.5.patch
+OK GPP_STAGE: linux-2.6.29-MPC8315-fast-route.patch
+OK GPP_STAGE: linux-2.6.32-P2020DS-0001-Delay-async-readahead.patch
+OK GPP_STAGE: linux-2.6.29-MPC8315-Sendpages.patch
+OK GPP_STAGE: linux-2.6.29-MPC8315-eTSEC-TSO.patch
+OK GPP_STAGE: linux-2.6.29-MPC8315-TSO-recycle-SKB.patch
+OK GPP_STAGE: linux-2.6.29.6-sata-fsl-fix-ATAPI-issue-with-PMP.patch
+OK GPP_STAGE: linux-2.6.29.6-mpc8315erdb-disable-the-GTM-in-default-cfg.patch
+
+checking: skell
+=================
+License: GPL
+OK GPP_STAGE: skell-1.19.tar.gz
+
+checking: base_libs
+=====================
+License: LGPL
+
+checking: busybox
+===================
+License: GPL
+OK GPP_STAGE: busybox-1.11.2.tar.bz2
+OK GPP_STAGE: busybox-1.11.2-getty-nobaud-1.patch
+OK GPP_STAGE: busybox-1.11.2-loop-24-compat.patch
+OK GPP_STAGE: busybox-1.11.2-msh-signals.patch
+OK GPP_STAGE: busybox-1.11.2-msh-alias-1.patch
+
+checking: net-tools
+=====================
+License: GPL
+OK GPP_STAGE: net-tools-1.60.tar.bz2
+OK GPP_STAGE: net-tools-1.60-miitool-gcc33-1.patch
+OK GPP_STAGE: net-tools-1.60-2.patch
+OK GPP_STAGE: net-tools-1.60-gcc34.patch
+
+checking: e2fsprogs
+=====================
+License: GPL
+OK GPP_STAGE: e2fsprogs-1.41.4.tar.gz
+
+checking: hdparm
+==================
+License: BSD
+OK GPP_STAGE: hdparm-5.9.tar.gz
+
+checking: libelf
+==================
+License: LGPL
+OK GPP_STAGE: libelf-0.8.5.tar.gz
+
+checking: ethtool
+===================
+License: GPL
+OK GPP_STAGE: ethtool-3.tar.gz
+OK GPP_STAGE: ethtool-3-fifo.patch
+
+checking: pciutils
+====================
+License: GPL
+OK GPP_STAGE: pciutils-2.2.4.tar.gz
+OK GPP_STAGE: pciutils-2.2.4-85xx-PCIe.patch
+OK GPP_STAGE: pciutils-2.2.4-fix-configure.patch
+
+checking: i2c-tools
+=====================
+License: GPL
+OK GPP_STAGE: i2c-tools-3.0.2.tar.bz2
+
+checking: hotplug
+===================
+License: GPL
+OK GPP_STAGE: hotplug-2004_03_29.tar.gz
+OK GPP_STAGE: hotplug-2004_03_29-initd.patch
+OK GPP_STAGE: hotplug-2004_03_29-dash.patch
+
+checking: vsftpd
+==================
+License: GPL
+OK GPP_STAGE: vsftpd-2.0.5.tar.gz
+OK GPP_STAGE: vsftpd-2.0.3-sysdeputil_uc.patch
+OK GPP_STAGE: vsftpd-2.0.5-syscall2.patch
+OK GPP_STAGE: vsftpd-2.0.5-config.patch
+
+checking: apptrk-ppcbin
+=========================
+License: Freescale EULA : explicit user acceptance required
+OK GPP_STAGE: AppTRK-1.37.tgz
+
+checking: udev
+================
+License: GPL
+OK GPP_STAGE: udev-117.tar.bz2
+OK GPP_STAGE: udev-117-init-script.patch
+OK GPP_STAGE: udev-imx-input-rules-3.patch
+OK GPP_STAGE: udev-automount-v4.patch
+OK GPP_STAGE: udev-117-init_script.patch
+OK GPP_STAGE: udev-117-mount.patch
+
+checking: dtc
+===============
+License: GPL
+OK GPP_STAGE: dtc-1.2.0.tar.gz
+OK GPP_STAGE: dtc-v1.2.0-804fed8.patch
+
+checking: sysconfig
+=====================
+License: GPL
+
+checking: merge
+=================
+License: GPL
+
+checking: modeps
+==================
+License: GPL
+
+
+Copying additional packages in host config (mandatory)
+---------------------------------------------------------
+
+
+checking: rpm-fs
+==================
+License: GPL
+OK GPP_STAGE: rpm-4.0.4.tar.gz
+OK GPP_STAGE: rpm_lfs.patch
+OK GPP_STAGE: rpm-4.0.4-python-configure.patch
+OK GPP_STAGE: rpm-4.0.4-sysconfig-configure.patch
+OK GPP_STAGE: rpm-4.0.4-no-usr-local.patch
+
+checking: mkspooflinks
+========================
+License: GPL
+OK GPP_STAGE: mkspooflinks-3.4.tar.gz
+OK GPP_STAGE: mkspooflinks-3.4-mmlink.patch
+OK GPP_STAGE: mkspooflinks-3.4-prefixbefore.patch
+OK GPP_STAGE: mkspooflinks-3.4-ccache.patch
+OK GPP_STAGE: mkspooflinks-3.4-filter-link-paths.patch
+
+checking: distcc
+==================
+License: GPL
+OK GPP_STAGE: distcc-2.18.3.tar.bz2
+
+checking: ccache
+==================
+License: GPL
+OK GPP_STAGE: ccache-2.4.tar.gz
+OK GPP_STAGE: ccache.bsh.in
+OK GPP_STAGE: ccache.csh.in
+OK GPP_STAGE: ccache-html-links.patch
+OK GPP_STAGE: ccache-2.4-coverage-231462.patch
+OK GPP_STAGE: ccache-2.4-hardlink-doc.patch
+OK GPP_STAGE: ccache-2.4-noHOME-315441.patch
+OK GPP_STAGE: ccache-2.4-md.patch
+
+checking: bison
+=================
+License: GPL
+OK GPP_STAGE: bison-2.3.tar.bz2
+
+checking: flex
+================
+License: BSD
+OK GPP_STAGE: flex-2.5.33.tar.gz
+
+checking: texinfo
+===================
+License: GPL
+OK GPP_STAGE: texinfo-4.8.tar.bz2
+
+checking: autoconf
+====================
+License: GPL
+OK GPP_STAGE: autoconf-2.57.tar.bz2
+
+checking: libtool
+===================
+License: GPL
+OK GPP_STAGE: libtool-1.5.tar.gz
+
+checking: lkc
+===============
+License: GPL
+OK GPP_STAGE: lkc-1.4.tar.gz
+OK GPP_STAGE: lkc-1.4-lxdialog.patch
+OK GPP_STAGE: lkc-1.4-1.patch
+OK GPP_STAGE: lkc-1.4-ncurses.patch
+OK GPP_STAGE: lkc-1.4-help.patch
+OK GPP_STAGE: lkc-1.4-defaults-4.patch
+OK GPP_STAGE: lkc-1.4-search-5.patch
+OK GPP_STAGE: lkc-1.4-datestamp.patch
+OK GPP_STAGE: lkc-1.4-dashsource.patch
+OK GPP_STAGE: lkc-1.4-config_title-1.patch
+OK GPP_STAGE: lkc-1.4-config_filename-1.patch
+
+checking: wget
+================
+License: GPL
+OK GPP_STAGE: wget-1.9.1.tar.gz
+
+checking: uclinux-cksum
+=========================
+License: BSD
+OK GPP_STAGE: cksum-19990607.tar.gz
+OK GPP_STAGE: cksum-19990607-1122994071.patch
+
+checking: genext2fs
+=====================
+License: GPL
+OK GPP_STAGE: genext2fs-1.4.1.tar.gz
+OK GPP_STAGE: genext2fs-makefile_in.patch
+OK GPP_STAGE: genext2fs-1.4.1-1.3.patch
+
+checking: genromfs
+====================
+License: GPL
+OK GPP_STAGE: genromfs-0.5.1.tar.gz
+OK GPP_STAGE: genromfs-0.5.1-make.patch
+OK GPP_STAGE: genromfs-0.5.1-adddot.patch
+
+checking: gen_init_cpio
+=========================
+License: GPL
+OK GPP_STAGE: gen_init_cpio-2.6.25-rc7.tar.gz
+
+checking: u-boot-tools
+========================
+License: GPL
+OK GPP_STAGE: u-boot-tools-1.1.6.tar.bz2
+OK GPP_STAGE: u-boot-tools-1.1.6-make_env.patch
+
+checking: mtd-utils-20060302
+==============================
+License: GPL
+OK GPP_STAGE: mtd-utils-20060302.tar.bz2
+OK GPP_STAGE: mtd-utils-20060302-find_fs_entry.patch
+OK GPP_STAGE: mtd-utils-20060302-eraseall.patch
+OK GPP_STAGE: mtd-utils-20060302-eraseall_prog.patch
+
+checking: pkgconfig
+=====================
+License: GPL
+OK GPP_STAGE: pkg-config-0.21.tar.gz
+OK GPP_STAGE: pkg-config-0.21-prefix_mungling.patch
+
+checking: cramfs
+==================
+License: GPL
+OK GPP_STAGE: cramfs-20081121.tar.gz
+
+checking: unifdef
+===================
+License: BSD
+OK GPP_STAGE: unifdef-1.0.tar.gz
+
+checking: sparse
+==================
+License: Open Software License
+OK GPP_STAGE: sparse-0.4.tar.gz
+OK GPP_STAGE: sparse-0.4-array-fix.patch
+
+checking: git
+===============
+License: GPL
+OK GPP_STAGE: git-1.5.6.5.tar.gz
+OK GPP_STAGE: git-1.5.6.5-no-perl-install.patch
+
+checking: tunctl
+==================
+License: GPL+
+OK GPP_STAGE: tunctl.c-1.4
+
+checking: mux_server
+======================
+License: LGPL
+OK GPP_STAGE: mux_server.c
+OK GPP_STAGE: mux_sever-1.0-fs-decl.patch
+
+
+Copying additional selectable content (optional)
+---------------------------------------------------
+
+
+checking for additional toolchains
+------------------------------------
+
+Checking for additional bootloaders
+-------------------------------------
+
+Checking for additional kernels
+---------------------------------
+
+checking: kernel26-dir-build
+==============================
+License: GPL
+
+Checking for additional packages
+----------------------------------
+
+checking: colilo
+==================
+License: GPL
+OK GPP_STAGE: colilo-0.3.3-fsl.tar.gz
+OK GPP_STAGE: colilo_cache.1.patch
+OK GPP_STAGE: colilo-gcc-4.1.patch
+OK GPP_STAGE: colilo-reloc.patch
+
+checking: dbug
+================
+License: Freescale EULA : explicit user acceptance required
+OK GPP_STAGE: dbug-4.d.tar.gz
+
+checking: dev
+===============
+License: GPL
+OK GPP_STAGE: dev-1.1.tar.gz
+
+checking: glibc
+=================
+License: LGPL
+OK GPP_STAGE: glibc-2.5.tar.bz2
+OK GPP_STAGE: glibc-ports-2.5.tar.bz2
+OK GPP_STAGE: glibc-libidn-2.5.tar.bz2
+OK GPP_STAGE: glibc-4.2-187-from-fsf-2_5.diff.gz
+OK GPP_STAGE: glibc_ports-4.2-187-from-fsf-2_5.diff.gz
+
+checking: uclibc
+==================
+License: LGPL
+OK GPP_STAGE: uClibc-r18301.tar.bz2
+OK GPP_STAGE: linux-libc-headers-2.6.12.0.tar.bz2
+OK GPP_STAGE: linux-2.6.20.tar.bz2
+OK GPP_STAGE: uclibc-getopt_h-groff.patch
+OK GPP_STAGE: uclibc-rcmd_c-inetutils.patch
+
+checking: binutils
+====================
+License: GPL
+OK GPP_STAGE: binutils-2.18.tar.bz2
+OK GPP_STAGE: binutils-4.3-74-from-fsf-2_18.diff.bz2
+
+checking: gmp
+===============
+License: LGPL
+OK GPP_STAGE: gmp-4.2.4.tar.bz2
+
+checking: mpfr
+================
+License: LGPL
+OK GPP_STAGE: mpfr-2.3.2.tar.bz2
+
+checking: gcc
+===============
+License: GPL
+OK GPP_STAGE: gcc-4.2.1.tar.bz2
+OK GPP_STAGE: gcc-4.2-82-from-fsf-4_2_1.diff.gz
+OK GPP_STAGE: gcc-4.2.1-newer-texinfo.patch
+
+checking: blob-imx21ads
+=========================
+License: GPL
+OK GPP_STAGE: blob-2.0.5-pre2.tar.gz
+OK GPP_STAGE: blob.mx21-3.patch
+OK GPP_STAGE: blob.mx21-drive-strength-pcmcia.patch
+
+checking: btcs
+================
+License: BSD and GPL
+OK GPP_STAGE: btcs-1.2.1.tar.gz
+
+checking: tinylogin
+=====================
+License: GPL
+OK GPP_STAGE: tinylogin-1.4.tar.bz2
+OK GPP_STAGE: tinylogin.tiocspgrp.patch
+OK GPP_STAGE: tinylogin-1.4-noroot.patch
+
+checking: ntpclient
+=====================
+License: GPL
+OK GPP_STAGE: ntpclient_2003_194.tar.gz
+OK GPP_STAGE: ntpclient-2003_194-adjtimex.patch
+
+checking: modutils
+====================
+License: GPL
+OK GPP_STAGE: modutils-2.4.25.tar.bz2
+OK GPP_STAGE: modutils-2.4.25-flex251.patch
+
+checking: module-init-tools
+=============================
+License: GPL
+OK GPP_STAGE: module-init-tools-3.1-pre5.tar.bz2
+OK GPP_STAGE: module-init-tools-3.1-pre5.tar.bz2.sign
+OK GPP_STAGE: modprobe.conf.dist
+OK GPP_STAGE: module-init-tools-defconfig.patch
+
+checking: libtermcap
+======================
+License: LGPL
+OK GPP_STAGE: termcap-2.0.8.tar.bz2
+OK GPP_STAGE: termcap-2.0.8-shared.patch
+OK GPP_STAGE: termcap-2.0.8-setuid.patch
+OK GPP_STAGE: termcap-2.0.8-instnoroot.patch
+OK GPP_STAGE: termcap-2.0.8-compat21.patch
+OK GPP_STAGE: termcap-2.0.8-xref.patch
+OK GPP_STAGE: termcap-2.0.8-fix-tc.patch
+OK GPP_STAGE: termcap-2.0.8-ignore-p.patch
+OK GPP_STAGE: termcap-buffer.patch
+OK GPP_STAGE: termcap-2.0.8-bufsize.patch
+OK GPP_STAGE: termcap-2.0.8-colon.patch
+OK GPP_STAGE: libtermcap-aaargh.patch
+OK GPP_STAGE: termcap-2.0.8-glibc22.patch
+
+checking: termcap
+===================
+License: BSD
+OK GPP_STAGE: termcap-mini-1.2.tar.gz
+OK GPP_STAGE: termcap-1.2-vt102.patch
+
+checking: bash
+================
+License: GPL
+OK GPP_STAGE: bash-2.05b.tar.gz
+OK GPP_STAGE: bash-2.05b-2.patch
+OK GPP_STAGE: bash-2.05b-gcc-3.4-malloc.patch
+
+checking: sash
+================
+License: GPL/Distributable
+OK GPP_STAGE: sash-1.1-1.tar.gz
+OK GPP_STAGE: sash-1.1-1.Makefile.patch
+OK GPP_STAGE: sash-1.1-1144141552.patch
+OK GPP_STAGE: sash-1.1-hz.patch
+
+checking: coreutils
+=====================
+License: GPL
+OK GPP_STAGE: coreutils-6.3.tar.bz2
+OK GPP_STAGE: coreutils-6.3-gcc-4.3.patch
+OK GPP_STAGE: coreutils-6.3-no-man.patch
+
+checking: seq
+===============
+License: GPL
+
+checking: zlib
+================
+License: zlib (Distributable)
+OK GPP_STAGE: zlib-1.2.3.tar.bz2
+OK GPP_STAGE: zlib-1.2.3-arflags-1.patch
+
+checking: lfs-utils
+=====================
+License: BSD/UCB style license (distributable)
+OK GPP_STAGE: lfs-utils-0.3.tar.bz2
+OK GPP_STAGE: lfs-utils-0.3-strip.patch
+OK GPP_STAGE: lfs-utils-0.3-mktemp-config_update-1.patch
+
+checking: findutils
+=====================
+License: GPL
+OK GPP_STAGE: findutils-4.2.28.tar.gz
+
+checking: gawk
+================
+License: GPL
+OK GPP_STAGE: gawk-3.1.3.tar.bz2
+OK GPP_STAGE: gawk-3.1.3-libexecdir.patch
+
+checking: ncurses
+===================
+License: Distributable
+OK GPP_STAGE: ncurses-5.3.tar.gz
+OK GPP_STAGE: ncurses-5.3-etip-2.patch
+OK GPP_STAGE: ncurses-5.3-vsscanf.patch
+OK GPP_STAGE: ncurses-5.3-wint_t.patch
+
+checking: gdbm
+================
+License: GPL
+OK GPP_STAGE: gdbm-1.8.3.tar.gz
+OK GPP_STAGE: gdbm-1.8.3-ubuntu.patch
+
+checking: perl
+================
+License: Artistic or GPL
+OK GPP_STAGE: perl-5.8.8.tar.gz
+OK GPP_STAGE: perl-5.8.8-Glob_pm.simple
+OK GPP_STAGE: perl-5.8.8-config_sh_macg4
+OK GPP_STAGE: perl-5.8.8-gcc-4.2.patch
+OK GPP_STAGE: perl-5.8.8-dash-shell.patch
+OK GPP_STAGE: perl-5.8.8-asm-page-header.patch
+
+checking: vim
+===============
+License: Vim (Distributable)
+OK GPP_STAGE: vim-6.2.tar.bz2
+OK GPP_STAGE: vim-6.2-crossbuild.patch
+OK GPP_STAGE: vim-6.2-tputs-tgoto.patch
+OK GPP_STAGE: vim-6.2-awk.patch
+
+checking: m4
+==============
+License: GPL
+OK GPP_STAGE: m4-1.4.tar.gz
+
+checking: less
+================
+License: GPL
+OK GPP_STAGE: less-381.tar.gz
+
+checking: groff
+=================
+License: GPL
+OK GPP_STAGE: groff-1.18.1.tar.gz
+OK GPP_STAGE: groff-1.18.1-crossbuild.patch
+OK GPP_STAGE: groff-post-html.patch
+
+checking: sed
+===============
+License: GPL
+OK GPP_STAGE: sed-4.0.7.tar.gz
+
+checking: gettext
+===================
+License: GPL
+OK GPP_STAGE: gettext-0.15.tar.gz
+OK GPP_STAGE: gettext-0.15-destdir.patch
+OK GPP_STAGE: gettext-error_print_progname.patch
+
+checking: inetutils
+=====================
+License: GPL
+OK GPP_STAGE: inetutils-1.4.2.tar.gz
+OK GPP_STAGE: inetutils-1.4.2-rm_tftp_h.patch
+OK GPP_STAGE: inetutils-1.4.2-gcc4_fixes-2.patch
+OK GPP_STAGE: inetutils-1.4.2-gcc-4.3.patch
+OK GPP_STAGE: inetutils-1.4.2-ruserpass-uclibc.patch
+
+checking: automake
+====================
+License: GPL
+OK GPP_STAGE: automake-1.7.6.tar.bz2
+
+checking: file
+================
+License: BSD
+OK GPP_STAGE: file-4.13.tar.gz
+
+checking: bzip2
+=================
+License: BSD
+OK GPP_STAGE: bzip2-1.0.2.tar.gz
+OK GPP_STAGE: bzip2-1.0.2-notest.patch
+OK GPP_STAGE: bzip2-1.0.2-mandir.patch
+
+checking: diffutils
+=====================
+License: GPL
+OK GPP_STAGE: diffutils-2.8.1.tar.gz
+OK GPP_STAGE: diffutils-2.8.1-mempcpy.patch
+
+checking: dosfstools
+======================
+License: GPL
+OK GPP_STAGE: dosfstools-2.11.tar.gz
+OK GPP_STAGE: dosfstools-2.11-2.1.patch
+
+checking: ed
+==============
+License: GPL
+OK GPP_STAGE: ed-0.2.tar.gz
+OK GPP_STAGE: ed-0.2-mkstemp.patch
+OK GPP_STAGE: ed-0.2-mandir.patch
+
+checking: kbd
+===============
+License: GPL
+OK GPP_STAGE: kbd-1.08.tar.gz
+OK GPP_STAGE: kbd-1.08-more-programs.patch
+OK GPP_STAGE: kbd-1.08-chown.patch
+
+checking: grep
+================
+License: GPL
+OK GPP_STAGE: grep-2.5.1.tar.bz2
+OK GPP_STAGE: grep-2.5.1-symlinks.patch
+OK GPP_STAGE: grep-2.5.1-mempcpy.patch
+
+checking: grub
+================
+License: GPL
+OK GPP_STAGE: grub-0.93.tar.gz
+OK GPP_STAGE: grub-0.93-gcc33-1.patch
+
+checking: man
+===============
+License: GPL
+OK GPP_STAGE: man-1.5m2.tar.bz2
+OK GPP_STAGE: man-1.5m2-manpath.patch
+OK GPP_STAGE: man-1.5m2-pager.patch
+OK GPP_STAGE: man-1.5m2-80cols.patch
+OK GPP_STAGE: man-1.5m2-cross-compile.patch
+
+checking: make
+================
+License: GPL
+OK GPP_STAGE: make-3.80.tar.bz2
+
+checking: buildroot-config
+============================
+License: GPL
+OK GPP_STAGE: buildroot-config-1.3.tar.gz
+
+checking: patch
+=================
+License: GPL
+OK GPP_STAGE: patch-2.5.4.tar.gz
+OK GPP_STAGE: patch-2.5.4-fix_cross_compile_detection.patch
+
+checking: procinfo
+====================
+License: GPL
+OK GPP_STAGE: procinfo-18.tar.gz
+OK GPP_STAGE: procinfo-18-mandir.patch
+OK GPP_STAGE: procinfo-18-siglist.patch
+
+checking: procps
+==================
+License: GPL
+OK GPP_STAGE: procps-3.2.7.tar.gz
+
+checking: psmisc
+==================
+License: GPL
+OK GPP_STAGE: psmisc-22.3.tar.gz
+OK GPP_STAGE: psmisc-22.3-intl.patch
+
+checking: sysklogd
+====================
+License: GPL/BSD
+OK GPP_STAGE: sysklogd-1.4.1.tar.gz
+OK GPP_STAGE: sysklogd-1.4.1-man.patch
+OK GPP_STAGE: sysklogd-1.4.1-kernel_headers-1.patch
+OK GPP_STAGE: sysklogd-1.4.1-permissions.patch
+
+checking: devfsd
+==================
+License: GPL
+OK GPP_STAGE: devfsd-v1.3.25.tar.gz
+OK GPP_STAGE: devfsd-uclibc-nls.patch
+OK GPP_STAGE: devfsd-1.3.25-devfs_fs-hdr.patch
+
+checking: sysvinit
+====================
+License: GPL
+OK GPP_STAGE: sysvinit-2.85.tar.gz
+OK GPP_STAGE: sysvinit-2.85-Makefile.patch
+OK GPP_STAGE: sysvinit-2.85-noinitctldev.patch
+OK GPP_STAGE: sysvinit-2.85-lcrypt.patch
+
+checking: tar
+===============
+License: GPL
+OK GPP_STAGE: tar-1.15.tar.bz2
+
+checking: util-linux
+======================
+License: GPL
+OK GPP_STAGE: util-linux_2.13.orig.tar.gz
+OK GPP_STAGE: util-linux_2.13-8.diff.gz
+OK GPP_STAGE: util-linux-2.13-fixups.patch
+OK GPP_STAGE: util-linux-2.12-fdiskbsdlabel_h_m68k.patch
+OK GPP_STAGE: util-linux-2.12-cf-bitops_h.patch
+
+checking: db1
+===============
+License: BSD
+OK GPP_STAGE: db.1.85.tar.gz
+OK GPP_STAGE: db.1.85.patch
+OK GPP_STAGE: db.1.85.s390.patch
+OK GPP_STAGE: db.1.85.nodebug.patch
+
+checking: db4
+===============
+License: GPL-like BSD variant
+OK GPP_STAGE: db-4.5.20.tar.gz
+
+checking: popt
+================
+License: X11 style
+OK GPP_STAGE: popt-1.7.tar.gz
+
+checking: libusb
+==================
+License: LGPL
+OK GPP_STAGE: libusb-0.1.8.tar.gz
+
+checking: usbutils
+====================
+License: GPL
+OK GPP_STAGE: usbutils-0.70.tar.gz
+
+checking: irattach
+====================
+License: GPL
+OK GPP_STAGE: irda-utils-0.9.18.tar.gz
+
+checking: irdadump
+====================
+License: GPL
+OK GPP_STAGE: irda-utils-0.9.18-irdadump-hinko.patch
+
+checking: wireless-tools
+==========================
+License: GPL
+OK GPP_STAGE: wireless_tools.29.tar.gz
+OK GPP_STAGE: wireless-tools-29-tc-segv.patch
+
+checking: wpa_supplicant
+==========================
+License: GPL
+OK GPP_STAGE: wpa_supplicant-0.5.9.tar.gz
+
+checking: oprofile
+====================
+License: GPL
+OK GPP_STAGE: oprofile-0.9.3.tar.gz
+OK GPP_STAGE: oprofile-0.9.3-arm11-update-l2cache-events.patch
+OK GPP_STAGE: oprofile-0.9.3-bfd_get_synthetic_symtab-hack.patch
+OK GPP_STAGE: oprofile-0.9.3-armv6-l1event-counters.patch
+
+checking: libnet
+==================
+License: BSD
+OK GPP_STAGE: libnet-1.1.2.1.tar.gz
+OK GPP_STAGE: libnet-1.1.2.1-1189704364.patch
+
+checking: libpcap
+===================
+License: BSD
+OK GPP_STAGE: libpcap-0.8.3.tar.gz
+
+checking: tcpdump
+===================
+License: BSD
+OK GPP_STAGE: tcpdump-3.8.3.tar.gz
+
+checking: iperf
+=================
+License: Distributable/GPL
+OK GPP_STAGE: iperf-1.7.0-source.tar.gz
+OK GPP_STAGE: iperf-1.7.0-vfork.patch
+
+checking: netperf
+===================
+License: Distributable
+OK GPP_STAGE: netperf-2.4.4.tar.gz
+OK GPP_STAGE: netperf-2.4.4-vfork.patch
+OK GPP_STAGE: netperf-2.4.4-fix-cpuset.patch
+
+checking: iproute
+===================
+License: GPL
+OK GPP_STAGE: iproute2-2.6.11-050330.tar.gz
+OK GPP_STAGE: iproute-2.6.11-socket_h_warning.patch
+OK GPP_STAGE: iproute2-paretonormal-overflow.patch
+
+checking: boa
+===============
+License: GPL
+OK GPP_STAGE: boa-0.94.14rc21.tar.gz
+OK GPP_STAGE: boa-0.94.14rc21-nommu.patch
+
+checking: tcp_wrappers
+========================
+License: Distributable
+OK GPP_STAGE: tcp_wrappers_7.6.tar.gz
+OK GPP_STAGE: tcp_wrappers-7.6-shared-lib-plus-plus.patch
+OK GPP_STAGE: tcp_wrappers-7.6-uclibc.patch
+OK GPP_STAGE: tcp_wrappers-7.6-malloc.patch
+OK GPP_STAGE: tcp_wrappers-7.6-non-root.patch
+OK GPP_STAGE: tcp_wrappers-7.6-uclibc-strerror.patch
+
+checking: portmap
+===================
+License: BSD
+OK GPP_STAGE: portmap_5beta.tar.gz
+OK GPP_STAGE: portmap-5beta-compilation-fixes-2.patch
+OK GPP_STAGE: portmap-5beta-glibc-errno-fix.patch
+OK GPP_STAGE: portmap-5beta-non-root.patch
+OK GPP_STAGE: portmap-5beta-strerror.patch
+
+checking: rng-tools
+=====================
+License: GPL
+OK GPP_STAGE: rng-tools-2.tar.gz
+OK GPP_STAGE: argp-standalone-1.3.tar.gz
+OK GPP_STAGE: argp-standalone-1.3-throw.patch
+
+checking: dropbear
+====================
+License: MIT
+OK GPP_STAGE: dropbear-0.52.tar.gz
+OK GPP_STAGE: dropbear_hackable_rsa_host_key
+
+checking: openssl
+===================
+License: BSD style
+OK GPP_STAGE: openssl-0.9.8g.tar.gz
+OK GPP_STAGE: openssl-md4_size_t.patch
+OK GPP_STAGE: openssl-md5_size_t.patch
+OK GPP_STAGE: openssl-sha_size_t.patch
+OK GPP_STAGE: openssl-0.9.8g-lib64.patch
+OK GPP_STAGE: openssl-0.9.8g-ripemd_size_t.patch
+OK GPP_STAGE: openssl-0.9.8g-sec.patch
+OK GPP_STAGE: openssl-0.9.8g-cryptodev.patch
+
+checking: openssh
+===================
+License: BSD
+OK GPP_STAGE: openssh-4.3p2.tar.gz
+OK GPP_STAGE: openssh_hackable_keys.tar.gz
+
+checking: ipsec-tools
+=======================
+License: BSD
+OK GPP_STAGE: ipsec-tools-0.7.1.tar.gz
+OK GPP_STAGE: ipsec-tools-0.6.4-glob_tilde.patch
+
+checking: ipsecadm
+====================
+License: GPL
+OK GPP_STAGE: ipsecadm-0.9-pre.tar.gz
+
+checking: iptables
+====================
+License: GPL
+OK GPP_STAGE: iptables-1.4.2.tar.bz2
+OK GPP_STAGE: userspace-iptables-1.4.2-l7pme-1.patch
+OK GPP_STAGE: iptables-1.4.2-libxt_TOS.patch
+
+checking: openswan
+====================
+License: GPL
+OK GPP_STAGE: openswan-2.6.18.tar.gz
+OK GPP_STAGE: openswan-2.6.18-make-fixes.patch
+
+checking: strongswan
+======================
+License: GPL
+OK GPP_STAGE: strongswan-4.2.8.tar.bz2
+
+checking: time
+================
+License: GPL
+OK GPP_STAGE: time-1.7.tar.gz
+
+checking: can4linux
+=====================
+License: GPL
+OK GPP_STAGE: can4linux.3.3.3.tgz
+OK GPP_STAGE: can4linux-mmuless.patch
+
+checking: watchdog
+====================
+License: GPL
+OK GPP_STAGE: watchdog-5.4.tar.gz
+OK GPP_STAGE: watchdog-fsl-config-2.patch
+OK GPP_STAGE: watchdog-fsl-daemon-3.patch
+
+checking: dspi
+================
+License: GPL
+OK GPP_STAGE: dspi-1.1.tar.gz
+OK GPP_STAGE: dspi-1.1-fixups1.patch
+OK GPP_STAGE: dspi-1.1-4.2-fixups.patch
+
+checking: which
+=================
+License: GPL
+OK GPP_STAGE: which-2.14.tar.gz
+
+checking: fakeroot
+====================
+License: GPL
+OK GPP_STAGE: fakeroot_1.5.10.tar.gz
+
+checking: expat
+=================
+License: MIT/X Consortium License
+OK GPP_STAGE: expat-1.95.8.tar.gz
+OK GPP_STAGE: expat-DESTDIR-1.95.8.patch
+OK GPP_STAGE: expat-ac_fixes.patch
+OK GPP_STAGE: expat-1.95.8-man1dir.patch
+
+checking: gdb
+===============
+License: GPL
+OK GPP_STAGE: gdb-6.6.tar.gz
+OK GPP_STAGE: gdb-6.0-tcsetpgrp.patch
+OK GPP_STAGE: gdb-4.2-82-from-fsf-6_6.diff.gz
+
+checking: m68k-gdb-bdm
+========================
+License: GPL
+OK GPP_STAGE: m68k-gdb-bdm-6.3.tar.gz
+
+checking: strace
+==================
+License: BSD
+OK GPP_STAGE: strace-4.5.14.tar.bz2
+OK GPP_STAGE: strace-4.5.14-syscall_eabi.patch
+OK GPP_STAGE: strace-fix-arm-bad-syscall.patch
+OK GPP_STAGE: strace-4.5.14-glibc_2.5-1.patch
+OK GPP_STAGE: strace-4.5.14-kernel_headers_2.6.18-1.patch
+OK GPP_STAGE: strace-4.4.98-1155222257.patch
+OK GPP_STAGE: strace-4.5.14-linux-dirent.patch
+OK GPP_STAGE: strace-arm-no-cachectl.patch
+
+checking: vsc7385-firmware-mpc8313erdb
+========================================
+License: Freescale EULA : explicit user acceptance required
+OK CPP_STAGE: vsc7385-firmware-mpc8313erdb-2.tgz
+
+checking: helloworld
+======================
+License: Public Domain, not copyrighted
+OK GPP_STAGE: helloworld-1.1.tar.bz2
+OK GPP_STAGE: helloworld-1.1-sysroot.patch
+
+checking: hello_mod
+=====================
+License: Public Domain, not copyrighted
+OK GPP_STAGE: hello_mod-1.2.tar.gz
+
+checking: simicsfs
+====================
+License: GPL
+OK GPP_STAGE: simicsfs-1.9.tar.gz
+OK GPP_STAGE: simicsfs-2.6.27-and-2.6.28.patch
+
+checking: lzo
+===============
+License: GPL
+OK GPP_STAGE: lzo-2.03.tar.gz
+
+checking: mtd-utils
+=====================
+License: GPL
+OK GPP_STAGE: mtd-utils-20090303.tar.bz2
+OK GPP_STAGE: mtd-utils-20060302-cf-byteswap_h-1.patch
+OK GPP_STAGE: mtd-utils-20080618-pres-int-files.patch
+OK GPP_STAGE: mtd-utils-20080618-macro-incr.patch
+OK CPP_STAGE: mtd-utils-20090303-nandwrite-intlv.patch
+OK CPP_STAGE: mtd-utils-20090303-32bit-addrs.patch
+
+checking: rpm
+===============
+License: GPL
+OK GPP_STAGE: rpm-4.0.4-macros
+OK GPP_STAGE: rpm-4.0.4-no-static.patch
+OK GPP_STAGE: rpm-4.0.4-rpmio_h.patch
+OK GPP_STAGE: rpm-4.0.4-arm-gas.patch
+
+checking: rsync
+=================
+License: GPL
+OK GPP_STAGE: rsync-2.6.5.tar.gz
+OK GPP_STAGE: rsync-2.6.5-va_copy-2.patch
+
+checking: ltp
+===============
+License: GPL
+OK GPP_STAGE: ltp-full-20070930.tgz
+OK GPP_STAGE: ltp-fsl-20070930.patch
+OK GPP_STAGE: ltp-full-20070930-config-base-small-fix.patch
+OK GPP_STAGE: ltp-full-20070930-uclibc.patch
+OK GPP_STAGE: ltp-full-20050608-del-failing-tests.patch
+OK GPP_STAGE: ltp-full-20070930-open-max.patch
+OK GPP_STAGE: ltp-full-20070930-linux-inotify.patch
+OK GPP_STAGE: ltp-full-20070930-linux-dirent-02.patch
+
+checking: lmbench
+===================
+License: GPL + restrictions
+OK GPP_STAGE: lmbench-3.0-a9.tgz
+
+checking: ppp
+===============
+License: BSD-like and GPL and Public Domain
+OK GPP_STAGE: ppp-2.4.4.tar.gz
+OK GPP_STAGE: ppp-2.4.4-header-checks-filter-off-df546d4c.patch
+OK GPP_STAGE: ppp-2.4.3-hspeed.patch
+
+checking: daemonizer
+======================
+License: GPL
+OK GPP_STAGE: daemonizer-1.0.tar.gz
+
+checking: unzip
+=================
+License: BSD
+OK GPP_STAGE: unzip552.tar.gz
+
+checking: pidentd
+===================
+License: Freely Distributable
+OK GPP_STAGE: pidentd-3.0.19.tar.gz
+OK GPP_STAGE: pidentd-3.0.19-crossbuild.patch
+
+checking: freetype
+====================
+License: GPL or FTL
+OK GPP_STAGE: freetype-2.3.9.tar.gz
+OK GPP_STAGE: proper-armel-asm-declaration.patch
+
+checking: fontconfig
+======================
+License: MIT
+OK GPP_STAGE: fontconfig-2.4.2.tar.gz
+
+checking: libpng
+==================
+License: distributable, OSI approved
+OK GPP_STAGE: libpng-1.2.8.tar.bz2
+OK GPP_STAGE: libpng-1.2.8-link_to_proper_libs-1.patch
+
+checking: XFree86
+===================
+License: XFree86 1.1 (BSD like)
+OK GPP_STAGE: XFree86-4.4.0-src-1.tgz
+OK GPP_STAGE: XFree86-4.4.0-src-2.tgz
+OK GPP_STAGE: XFree86-4.4.0-src-3.tgz
+OK GPP_STAGE: XFree86-4.4.0-src-4.tgz
+OK GPP_STAGE: XFree86-4.4.0-src-5.tgz
+OK GPP_STAGE: XFree86-4.4.0-src-6.tgz
+OK GPP_STAGE: XFree86-4.4.0-src-7.tgz
+
+checking: python
+==================
+License: OSI Approved Python License
+OK GPP_STAGE: Python-2.4.4.tar.bz2
+OK GPP_STAGE: python-2.4.4-cross-compile.diff
+OK GPP_STAGE: python-2.4.4-kill-dbpaths.patch
+OK GPP_STAGE: python-2.4.4-cross-compile-missing-modules.diff
+
+checking: libiconv
+====================
+License: LGPL
+OK GPP_STAGE: libiconv-1.11.tar.gz
+
+checking: libjpeg
+===================
+License: Distributable
+OK GPP_STAGE: jpegsrc.v6b.tar.gz
+
+checking: libtiff
+===================
+License: Distributable
+OK GPP_STAGE: tiff-3.8.2.tar.gz
+
+checking: glib2
+=================
+License: LGPL
+OK GPP_STAGE: glib-2.18.1.tar.bz2
+OK GPP_STAGE: glib2-2.12.11-relink.patch
+
+checking: DirectFB
+====================
+License: LGPL
+OK GPP_STAGE: DirectFB-1.1.0.tar.gz
+OK GPP_STAGE: DirectFB-1.1.0-ppcasm.patch
+OK GPP_STAGE: DirectFB-0.9.24-relink.patch
+OK GPP_STAGE: DirectFB-1.1.0-linux-config-h.patch
+
+checking: DirectFB-examples
+=============================
+License: MIT
+OK GPP_STAGE: DirectFB-examples-0.9.23.tar.gz
+
+checking: tslib
+=================
+License: LGPL
+OK GPP_STAGE: tslib-1.0.tar.bz2
+OK GPP_STAGE: tslib-1.0-enable_input_events.patch
+OK GPP_STAGE: tslib-1.0-mx-pre_gen-2.patch
+OK GPP_STAGE: tslib-1.0-directfb_link_fix.patch
+OK GPP_STAGE: tslib-1.0-mx-pre_config.patch
+
+checking: randrproto
+======================
+License: X11
+OK GPP_STAGE: randrproto-1.2.2.tar.bz2
+
+checking: renderproto
+=======================
+License: X11
+OK GPP_STAGE: renderproto-0.9.3.tar.bz2
+
+checking: fixesproto
+======================
+License: X11
+OK GPP_STAGE: fixesproto-4.0.tar.bz2
+
+checking: damageproto
+=======================
+License: X11
+OK GPP_STAGE: damageproto-1.1.0.tar.bz2
+
+checking: xf86driproto
+========================
+License: X11
+OK GPP_STAGE: xf86driproto-2.0.4.tar.bz2
+
+checking: xcmiscproto
+=======================
+License: X11
+OK GPP_STAGE: xcmiscproto-1.1.2.tar.bz2
+
+checking: xextproto
+=====================
+License: X11
+OK GPP_STAGE: xextproto-7.0.3.tar.bz2
+
+checking: xproto
+==================
+License: X11
+OK GPP_STAGE: xproto-7.0.13.tar.bz2
+
+checking: scrnsaverproto
+==========================
+License: X11
+OK GPP_STAGE: scrnsaverproto-1.1.0.tar.bz2
+
+checking: bigreqsproto
+========================
+License: X11
+OK GPP_STAGE: bigreqsproto-1.0.2.tar.bz2
+
+checking: resourceproto
+=========================
+License: X11
+OK GPP_STAGE: resourceproto-1.0.2.tar.bz2
+
+checking: fontsproto
+======================
+License: X11
+OK GPP_STAGE: fontsproto-2.0.2.tar.bz2
+
+checking: inputproto
+======================
+License: X11
+OK GPP_STAGE: inputproto-1.4.4.tar.bz2
+
+checking: kbproto
+===================
+License: X11
+OK GPP_STAGE: kbproto-1.0.3.tar.bz2
+
+checking: videoproto
+======================
+License: X11
+OK GPP_STAGE: videoproto-2.2.2.tar.bz2
+
+checking: compositeproto
+==========================
+License: X11
+OK GPP_STAGE: compositeproto-0.4.tar.bz2
+
+checking: recordproto
+=======================
+License: X11
+OK GPP_STAGE: recordproto-1.13.2.tar.bz2
+
+checking: fontcacheproto
+==========================
+License: X11
+OK GPP_STAGE: fontcacheproto-0.1.2.tar.bz2
+
+checking: xf86bigfontproto
+============================
+License: X11
+OK GPP_STAGE: xf86bigfontproto-1.1.2.tar.bz2
+
+checking: xcb-proto
+=====================
+License: X11
+OK GPP_STAGE: xcb-proto-1.2.tar.bz2
+
+checking: libpthread-stubs
+============================
+License: X11
+OK GPP_STAGE: libpthread-stubs-0.1.tar.bz2
+
+checking: libfontenc
+======================
+License: X11
+OK GPP_STAGE: libfontenc-1.0.4.tar.bz2
+
+checking: xtrans
+==================
+License: X11
+OK GPP_STAGE: xtrans-1.2.3.tar.bz2
+
+checking: libdrm
+==================
+License: X11
+OK GPP_STAGE: libdrm-2.3.1.tar.bz2
+
+checking: pixman
+==================
+License: X11
+OK GPP_STAGE: pixman-0.15.12.tar.bz2
+
+checking: libXau
+==================
+License: X11
+OK GPP_STAGE: libXau-1.0.4.tar.bz2
+
+checking: libxcb
+==================
+License: X11
+OK GPP_STAGE: libxcb-1.1.tar.bz2
+
+checking: libXfont
+====================
+License: X11
+OK GPP_STAGE: libXfont-1.3.3.tar.bz2
+
+checking: libXdmcp
+====================
+License: X11
+OK GPP_STAGE: libXdmcp-1.0.2.tar.bz2
+
+checking: libX11
+==================
+License: X11
+OK GPP_STAGE: libX11-1.1.5.tar.bz2
+OK GPP_STAGE: libX11-1.1.5-1221162795.patch
+
+checking: libxkbfile
+======================
+License: X11
+OK GPP_STAGE: libxkbfile-1.0.5.tar.bz2
+
+checking: libXrender
+======================
+License: X11
+OK GPP_STAGE: libXrender-0.9.4.tar.bz2
+
+checking: libpciaccess
+========================
+License: X11
+OK GPP_STAGE: libpciaccess-0.10.6.tar.bz2
+
+checking: fontutil
+====================
+License: X11
+OK GPP_STAGE: font-util-1.0.1.tar.bz2
+
+checking: libXext
+===================
+License: X11
+OK GPP_STAGE: libXext-1.0.4.tar.bz2
+
+checking: libXft
+==================
+License: X11
+OK GPP_STAGE: libXft-2.1.13.tar.bz2
+
+checking: libICE
+==================
+License: MIT/X11
+OK GPP_STAGE: libICE-1.0.4.tar.bz2
+
+checking: libSM
+=================
+License: MIT/X11
+OK GPP_STAGE: libSM-1.0.2.tar.bz2
+
+checking: libXpm
+==================
+License: MIT
+OK GPP_STAGE: libXpm-3.5.7.tar.bz2
+
+checking: libXt
+=================
+License: MIT
+OK GPP_STAGE: libXt-1.0.4.tar.bz2
+OK GPP_STAGE: libXt-1.0.2-libsm-fix.patch
+
+checking: libXmu
+==================
+License: MIT
+OK GPP_STAGE: libXmu-1.0.4.tar.bz2
+
+checking: libXaw
+==================
+License: MIT/X11
+OK GPP_STAGE: libXaw-1.0.4.tar.bz2
+
+checking: libXtst
+===================
+License: MIT
+OK GPP_STAGE: libXtst-1.0.3.tar.bz2
+
+checking: dbus
+================
+License: AFLv2.1 or GPLv2
+OK GPP_STAGE: dbus-1.2.6.tar.gz
+
+checking: dbus-glib
+=====================
+License: GPL
+OK GPP_STAGE: dbus-glib-0.76.tar.gz
+OK GPP_STAGE: dbus-glib-0.76-build-only-core-components.patch
+OK GPP_STAGE: dbus-glib-0.76-pregen-introspect-xml.patch
+
+checking: cairo
+=================
+License: LGPL or MPL 1.1
+OK GPP_STAGE: cairo-1.6.4.tar.gz
+
+checking: atk
+===============
+License: LGPL
+OK GPP_STAGE: atk-1.20.0.tar.gz
+
+checking: pango
+=================
+License: LGPL
+OK GPP_STAGE: pango-1.20.5.tar.bz2
+
+checking: alsa-lib
+====================
+License: LGPL
+OK GPP_STAGE: alsa-lib-1.0.18.tar.bz2
+OK GPP_STAGE: alsa-lib-1.0.18-nommu.patch
+OK GPP_STAGE: alsa-lib-1.0.18-relink.patch
+
+checking: gtk2
+================
+License: LGPL
+OK GPP_STAGE: gtk+-2.14.3.tar.bz2
+OK GPP_STAGE: gtk2-2.12.1-no-update-icon-cache.patch
+
+checking: swig
+================
+License: BSD
+OK GPP_STAGE: swig-1.3.21.tar.gz
+
+checking: microwindows
+========================
+License: MPL/GPL
+OK GPP_STAGE: microwindows-full-0.91.tar.gz
+
+checking: libxml2
+===================
+License: MIT
+OK GPP_STAGE: libxml2-2.7.2.tar.gz
+
+checking: httpd
+=================
+License: Apache (distributable)
+OK GPP_STAGE: httpd-2.0.54.tar.gz
+OK GPP_STAGE: httpd-2.0.54-fsl.patch
+
+checking: mysql
+=================
+License: GPL
+OK GPP_STAGE: mysql-4.1.12.tar.gz
+OK GPP_STAGE: mysql-4.1.12-fsl.patch
+OK GPP_STAGE: mysql-4.1.12-gcc-4.2.patch
+
+checking: php
+===============
+License: PHP (distributable)
+OK GPP_STAGE: php-5.0.4.tar.gz
+OK GPP_STAGE: php-5.0.4-fsl.patch
+OK GPP_STAGE: php-5.0.4-iconv.patch
+OK GPP_STAGE: ppp-zend_strtod.patch
+OK GPP_STAGE: php-5.0.4-fix_cross_compile_detection.patch
+
+checking: krb5
+================
+License: MIT (freely distributable)
+OK GPP_STAGE: krb5-1.3.4.tar.gz
+OK GPP_STAGE: krb5-fix-build-error.patch
+
+checking: subversion
+======================
+License: Apache/BSD-style
+OK GPP_STAGE: subversion-1.0.6.tar.bz2
+
+checking: intltool
+====================
+License: GPL
+FAILED : intltool-0.40.4.tar.bz2
+intltool-0.40.4.tar.bz2 not yet approved for distribution
+
+checking: libsoup
+===================
+License: LGPL
+OK GPP_STAGE: libsoup-2.24.3.tar.bz2
+
+checking: libidl
+==================
+License: LGPL
+OK GPP_STAGE: libIDL-0.8.11.tar.bz2
+
+checking: libgpg-error
+========================
+License: LGPL
+OK GPP_STAGE: libgpg-error-1.7.tar.bz2
+
+checking: libgcrypt
+=====================
+License: LGPL
+OK GPP_STAGE: libgcrypt-1.4.4.tar.bz2
+
+checking: libtasn1
+====================
+License: LGPL
+OK GPP_STAGE: libtasn1-1.8.tar.gz
+OK GPP_STAGE: libtasn1-1.8-config-cflags-fix.patch
+
+checking: ORBit2
+==================
+License: LGPL/GPL
+OK GPP_STAGE: ORBit2-2.14.16.tar.bz2
+OK GPP_STAGE: ORBit2-2.14.16-configure-cross-compile-fix.patch
+
+checking: GConf
+=================
+License: LGPL
+OK GPP_STAGE: GConf-2.6.1.tar.bz2
+
+checking: GConf-dbus
+======================
+License: LGPL
+OK GPP_STAGE: GConf-dbus-2.16.0.tar.bz2
+
+checking: xml-parser-pm
+=========================
+License: Perl (Artistic)
+OK GPP_STAGE: XML-Parser-2.34.tar.gz
+
+checking: libbonobo
+=====================
+License: LGPL/GPL
+OK GPP_STAGE: libbonobo-2.24.0.tar.bz2
+OK GPP_STAGE: libbonobo-2.24.0-rm-configure-gthread-check.patch
+
+checking: gnome-mime-data
+===========================
+License: GPL
+OK GPP_STAGE: gnome-mime-data-2.4.1.tar.bz2
+
+checking: shared-mime-info
+============================
+License: GPL
+OK GPP_STAGE: shared-mime-info-0.14.tar.gz
+
+checking: gnome-vfs
+=====================
+License: GPL/LGPL
+OK GPP_STAGE: gnome-vfs-2.24.1.tar.bz2
+
+checking: gnome-keyring
+=========================
+License: LGPL/GPL
+OK GPP_STAGE: gnome-keyring-2.24.1.tar.bz2
+
+checking: libgnome
+====================
+License: LGPL
+OK GPP_STAGE: libgnome-2.24.1.tar.bz2
+
+checking: libglade
+====================
+License: LGPL
+OK GPP_STAGE: libglade-2.6.3.tar.bz2
+
+checking: libart_lgpl
+=======================
+License: LGPL
+OK GPP_STAGE: libart_lgpl-2.3.20.tar.bz2
+
+checking: libgnomecanvas
+==========================
+License: LGPL
+OK GPP_STAGE: libgnomecanvas-2.20.1.1.tar.bz2
+
+checking: libbonoboui
+=======================
+License: LGPL/GPL
+OK GPP_STAGE: libbonoboui-2.24.0.tar.bz2
+
+checking: libgnomeui
+======================
+License: LGPL/GPL
+OK GPP_STAGE: libgnomeui-2.24.1.tar.bz2
+
+checking: readline
+====================
+License: GPL
+OK GPP_STAGE: readline-4.3.tar.gz
+
+checking: libsigc++
+=====================
+License: LGPL
+OK GPP_STAGE: libsigc++-2.0.3.tar.bz2
+
+checking: glibmm
+==================
+License: LGPL
+OK GPP_STAGE: glibmm-2.4.4.tar.bz2
+
+checking: gtkmm
+=================
+License: LGPL
+OK GPP_STAGE: gtkmm-2.4.5.tar.bz2
+
+checking: libgnomemm
+======================
+License: LGPL
+OK GPP_STAGE: libgnomemm-2.6.0.tar.bz2
+
+checking: libgnomecanvasmm
+============================
+License: LGPL
+OK GPP_STAGE: libgnomecanvasmm-2.6.1.tar.bz2
+
+checking: libglademm
+======================
+License: LGPL
+OK GPP_STAGE: libglademm-2.4.1.tar.bz2
+
+checking: gnome-vfsmm
+=======================
+License: LGPL
+OK GPP_STAGE: gnome-vfsmm-2.6.1.tar.bz2
+
+checking: gconfmm
+===================
+License: LGPL
+OK GPP_STAGE: gconfmm-2.6.1.tar.bz2
+
+checking: libgnomeuimm
+========================
+License: LGPL/GPL
+OK GPP_STAGE: libgnomeuimm-2.6.0.tar.bz2
+
+checking: boost
+=================
+License: Boost (distributable)
+FAILED : boost_1_39_0.tar.bz2
+boost_1_39_0.tar.bz2 not yet approved for distribution
+
+checking: gnome-icon-theme
+============================
+License: GPL
+OK GPP_STAGE: gnome-icon-theme-2.24.0.tar.bz2
+
+checking: hicolor-icon-theme
+==============================
+License: GPL
+OK GPP_STAGE: hicolor-icon-theme-0.5.tar.gz
+
+checking: libxslt
+===================
+License: MIT
+OK GPP_STAGE: libxslt-1.1.11.tar.bz2
+
+checking: glade2
+==================
+License: GPL
+OK GPP_STAGE: glade-2.6.5.tar.bz2
+
+checking: pygtk2
+==================
+License: LGPL
+OK GPP_STAGE: pygtk-2.4.0.tar.bz2
+
+checking: pexpect
+===================
+License: Python Software Foundation License
+OK GPP_STAGE: pexpect-0.98.tgz
+OK GPP_STAGE: pexpect-8nov04.patch
+
+checking: pyserial
+====================
+License: Python
+OK GPP_STAGE: pyserial-2.1.zip
+OK GPP_STAGE: pyserial-cux.patch
+
+checking: pcmcia-cs
+=====================
+License: MPL/GPL
+OK GPP_STAGE: pcmcia-cs-3.2.8.tar.gz
+
+checking: linux-atm
+=====================
+License: GPL/LGPL
+OK GPP_STAGE: linux-atm-2.4.1.tar.gz
+OK GPP_STAGE: linux-atm_2.4.1-17.diff
+OK GPP_STAGE: linux-atm-2.4.1-17-cross.patch
+OK GPP_STAGE: linux-atm-2.4.1-mkerrnos_pl.patch
+OK GPP_STAGE: linux-atm-2.4.1-uclibc-1.patch
+OK GPP_STAGE: linux-atm-2.4.1-types-h.patch
+OK GPP_STAGE: linux-atm-2.4.1-types-h-32.patch
+
+checking: libid3tag
+=====================
+License: GPL
+OK GPP_STAGE: libid3tag-0.15.1b.tar.gz
+
+checking: libmad
+==================
+License: GPL
+OK GPP_STAGE: libmad-0.15.1b.tar.gz
+OK GPP_STAGE: libmad-0.15.1b-gcc-4.3.patch
+
+checking: madplay
+===================
+License: GPL
+OK GPP_STAGE: madplay-0.15.2b.tar.gz
+OK GPP_STAGE: madplay-0.15.2b-libz.patch
+
+checking: mplayer
+===================
+License: GPL
+OK GPP_STAGE: mplayer_1.0~rc2.orig.tar.gz
+OK GPP_STAGE: mplayer_1.0~rc2-17+lenny3.diff
+OK GPP_STAGE: mplayer-1.0~rc2-m68knommu-1.patch
+
+checking: mp3play
+===================
+License: GPL
+OK GPP_STAGE: mp3play-1.0-0.tar.gz
+OK GPP_STAGE: mp3play-autoconf-1.0.patch
+OK GPP_STAGE: mp3play-1.0-ppc-fixes.patch
+
+checking: play
+================
+License: Distributable
+OK GPP_STAGE: play-1.0-0.tar.gz
+OK GPP_STAGE: play-math-1.0.patch
+
+checking: pcre
+================
+License: BSD License (revised)
+OK GPP_STAGE: pcre-6.3.tar.gz
+OK GPP_STAGE: pcre-6.3-relink.patch
+
+checking: lrzsz
+=================
+License: GPL
+OK GPP_STAGE: lrzsz_0.12.21.orig.tar.gz
+OK GPP_STAGE: lrzsz_0.12.21-4.diff
+
+checking: yaffs-utils
+=======================
+License: GPL
+OK GPP_STAGE: yaffs_utils-20060418.tar.gz
+OK GPP_STAGE: yaffs_mxc.patch
+OK GPP_STAGE: yaffs_utils-20060418-mtd-include.patch
+OK GPP_STAGE: yaffs_utils-20060418-include-order.patch
+
+checking: samba-3.0.2a
+========================
+License: GPL
+OK GPP_STAGE: samba-3.0.2a.tar.gz
+OK GPP_STAGE: samba-3.0.2-configure-cross-2.patch
+OK GPP_STAGE: samba-3.0.2-gcc4-fix.patch
+
+checking: mdadm
+=================
+License: GPL
+OK GPP_STAGE: mdadm-2.3.1.tar.gz
+
+checking: clamav
+==================
+License: GPL
+OK GPP_STAGE: clamav-0.94.tar.gz
+OK GPP_STAGE: clamav-0.88-configure-cross.patch
+
+checking: bonnie++
+====================
+License: GPL
+OK GPP_STAGE: bonnie++-1.93c.tgz
+OK GPP_STAGE: bonnie++-1.93c-getc_putc-cpp.patch
+OK GPP_STAGE: bonnie++-1.93c-gcc-4.3.patch
+
+checking: alsa-utils
+======================
+License: GPL
+OK GPP_STAGE: alsa-utils-1.0.11rc2.tar.bz2
+OK GPP_STAGE: alsa-utils-1.0.10-cf.patch
+OK GPP_STAGE: alsa-utils-1.0.11rc2-ldl.patch
+
+checking: dhcp
+================
+License: Internet Systems Consortium (distributable)
+OK GPP_STAGE: dhcp-3.0.3b1.tgz
+OK GPP_STAGE: dhcp-3.0.3b1-sip.patch
+OK GPP_STAGE: dhcp-3.0.3b1-defaults.patch
+OK GPP_STAGE: dhcp-3.0.3b1-types.patch
+OK GPP_STAGE: dhcp-3.0.3b1-usesockets.patch
+
+checking: bind
+================
+License: Internet Systems Consortium (distributable)
+OK GPP_STAGE: bind-9.3.2.tar.gz
+OK GPP_STAGE: bind-9.3.2-sip.patch
+
+checking: tvout-test-mx31
+===========================
+License: GPL
+OK GPP_STAGE: tvout-test-mx31-1.1.tar.gz
+
+checking: bridge-utils
+========================
+License: GPL
+OK GPP_STAGE: bridge-utils-1.2.tar.gz
+
+checking: cpio
+================
+License: GPL
+OK GPP_STAGE: cpio-2.6.tar.bz2
+
+checking: cracklib
+====================
+License: GPL
+OK GPP_STAGE: cracklib-2.8.9.tar.gz
+OK GPP_STAGE: cracklib-words.gz
+OK GPP_STAGE: cracklib-2.8.9-heimdal-1.patch
+
+checking: openobex
+====================
+License: GPL/LGPL
+OK GPP_STAGE: openobex-1.2.tar.gz
+OK GPP_STAGE: openobex-1.2-fixpaths.patch
+
+checking: hesiod
+==================
+License: Internet Systems Consortium (distributable)
+OK GPP_STAGE: hesiod-3.0.2.tar.gz
+
+checking: iputils
+===================
+License: GPL
+OK GPP_STAGE: iputils-0.0.4.tar.bz2
+OK GPP_STAGE: iputils-0.0.4-gcc-4.3.patch
+
+checking: schedutils
+======================
+License: BSD License
+OK GPP_STAGE: schedutils-0.7.2.tar.gz
+
+checking: setserial
+=====================
+License: GPL
+OK GPP_STAGE: setserial-2.17.tar.gz
+
+checking: mxc-misc
+====================
+License: GPL
+OK GPP_STAGE: misc-mx-20070112.tar.gz
+OK GPP_STAGE: misc-linux_2.6.19_fixup.patch
+OK GPP_STAGE: misc-remove_i2c.patch
+
+checking: iozone
+==================
+License: Freeware
+OK GPP_STAGE: iozone3_281.tar
+
+checking: devmem2
+===================
+License: GPL
+OK GPP_STAGE: devmem2.tar.gz
+OK GPP_STAGE: devmem2-fixups-2.patch
+
+checking: minicom
+===================
+License: GPL
+OK GPP_STAGE: minicom_2.2.orig.tar.gz
+
+checking: hardwaretest-imx
+============================
+License: GPL
+OK GPP_STAGE: hardwaretest-imx-1.3.tar.gz
+
+checking: dpm-utils-imx
+=========================
+License: GPL
+OK GPP_STAGE: dpm-utils-imx-1.0.tar.gz
+
+checking: timezone
+====================
+License: Public Domain/BSD
+OK GPP_STAGE: tzcode2006n.tar.gz
+OK GPP_STAGE: tzdata2006n.tar.gz
+OK GPP_STAGE: timezone-2006n-make.patch
+
+checking: mpc8555amc-dsputils
+===============================
+License: BSD
+OK GPP_STAGE: mpc8555amc-dsputils-1.3.tar.bz2
+
+checking: screen
+==================
+License: GPL
+OK GPP_STAGE: screen-4.0.2.tar.gz
+OK GPP_STAGE: screen-4.0.2-cross.patch
+OK GPP_STAGE: screen-4.0.2-wrap-local-headers.patch
+OK GPP_STAGE: screen-4.0.2-no-stropts.patch
+
+checking: linux-wlan
+======================
+License: MPL
+OK GPP_STAGE: linux-wlan-ng-0.1.12.tar.gz
+OK GPP_STAGE: wlan-0.1.12-mx21-1.patch
+OK GPP_STAGE: wlan-0.1.12-iobase.patch
+OK GPP_STAGE: wlan-0.1.12-host-cc.patch
+
+checking: nss-mdns
+====================
+License: LGPL
+OK GPP_STAGE: nss-mdns-0.8.tar.gz
+
+checking: floattest
+=====================
+License: Public Domain, not copyrighted
+FAILED : floattest-1.0.tar.bz2
+floattest-1.0.tar.bz2 not yet approved for distribution
+
+checking: whetstone
+=====================
+License: Not Distributable
+
+checking: valgrind
+====================
+License: GPL
+OK GPP_STAGE: valgrind-3.3.1.tar.bz2
+OK GPP_STAGE: valgrind-3.3.1-8xx.patch
+OK GPP_STAGE: valgrind-3.3.1-softfloat-02.patch
+
+checking: libnfnetlink
+========================
+License: GPL
+OK GPP_STAGE: libnfnetlink-0.0.25.tar.bz2
+OK GPP_STAGE: libnfnetlink-0.0.25-linux_types_h.patch
+
+checking: libnetfilter_conntrack
+==================================
+License: GPL
+OK GPP_STAGE: libnetfilter_conntrack-0.0.80.tar.bz2
+OK GPP_STAGE: libnetfilter_conntrack-0.0.80-relink.patch
+OK GPP_STAGE: libnetfilter_conntrack-0.0.80-glibc-2.8.patch
+
+checking: conntrack-tools
+===========================
+License: GPL
+OK GPP_STAGE: conntrack-tools-0.9.4.tar.bz2
+OK GPP_STAGE: conntrack-tools-0.9.4-path-max-bugfix.patch
+
+checking: sysfsutils
+======================
+License: GPL/LGPL
+OK GPP_STAGE: sysfsutils-2.1.0.tar.gz
+
+checking: pcmciautils
+=======================
+License: GPL
+OK GPP_STAGE: pcmciautils-014.tar.gz
+
+checking: bluez-libs
+======================
+License: GPL
+OK GPP_STAGE: bluez-libs-2.25.tar.gz
+OK GPP_STAGE: bluez-libs-2.25-limits_h.patch
+
+checking: bluez-utils
+=======================
+License: GPL
+OK GPP_STAGE: bluez-utils-2.25.tar.gz
+OK GPP_STAGE: bluez-utils-2.25-gcc-4.3.patch
+
+checking: bluez-hcidump
+=========================
+License: GPL
+OK GPP_STAGE: bluez-hcidump-1.29.tar.gz
+
+checking: liboil
+==================
+License: Two-Clause BSD
+OK GPP_STAGE: liboil-0.3.16.tar.gz
+OK GPP_STAGE: liboil-0.3.11-e500-configure.patch
+OK GPP_STAGE: liboil-0.3.11-ppcfpu-configure.patch
+OK GPP_STAGE: liboil-0.3.16-noaltivec.patch
+
+checking: faad2
+=================
+License: LGPL
+OK GPP_STAGE: faad2-2.6.1.tar.gz
+OK GPP_STAGE: faad2-configure.patch
+
+checking: libmpeg2
+====================
+License: GPL
+OK GPP_STAGE: mpeg2dec-0.4.1.tar.gz
+
+checking: farsight
+====================
+License: LGPL
+OK GPP_STAGE: farsight-0.1.25.tar.gz
+
+checking: gstreamer-core
+==========================
+License: LGPL
+OK GPP_STAGE: gstreamer-0.10.22.tar.bz2
+OK GPP_STAGE: gstreamer-core-0.10.12-relink.patch
+
+checking: gst-plugins-base
+============================
+License: LGPL
+OK GPP_STAGE: gst-plugins-base-0.10.22.tar.bz2
+OK GPP_STAGE: gst-plugins-base-0.10.12-relink.patch
+OK GPP_STAGE: gst-plugins-base-0.10.22-optplaybin.patch
+OK GPP_STAGE: gst-plugins-base-0.10.22-mpeg2avsyncfix.patch
+OK GPP_STAGE: gst-plugins-base-0.10.22-typefindaacplus2flac.patch
+
+checking: gst-plugins-good
+============================
+License: LGPL
+OK GPP_STAGE: gst-plugins-good-0.10.14.tar.bz2
+OK GPP_STAGE: gst-plugins-good-0.10.5-relink.patch
+
+checking: gst-plugins-bad
+===========================
+License: LGPL
+OK GPP_STAGE: gst-plugins-bad-0.10.11.tar.bz2
+OK GPP_STAGE: gst-plugins-bad-0.10.4-relink.patch
+
+checking: gst-plugins-ugly
+============================
+License: LGPL
+OK GPP_STAGE: gst-plugins-ugly-0.10.11.tar.bz2
+OK GPP_STAGE: gst-plugins-ugly-0.10.5-relink.patch
+
+checking: gst-ffmpeg
+======================
+License: LGPL
+OK GPP_STAGE: gst-ffmpeg-0.10.3.tar.bz2
+OK GPP_STAGE: gst-ffmpeg-0.10.3-relink.patch
+
+checking: gst-plugins-farsight
+================================
+License: LGPL
+OK GPP_STAGE: gst-plugins-farsight-0.12.5.tar.gz
+
+checking: qtopia
+==================
+License: GPL
+OK GPP_STAGE: qtopia-free-src-2.2.0.tar.gz
+OK GPP_STAGE: qtopia-free-2.2.0-0001-24Aug2006-ppc-qconfig.patch
+OK GPP_STAGE: qtopia-free-2.2.0-0002-24Aug2006-ppc-libavcodec-bigendian.patch
+OK GPP_STAGE: qtopia-free-2.2.0-0003-24Aug2006-qconfig-cursor-mouse.patch
+OK GPP_STAGE: qtopia-free-2.2.0-0004-24Aug2006-rgb555-and-swapped-byte-video.patch
+OK GPP_STAGE: qtopia-free-2.2.0-0005-24Aug2006-mpc5200-nogetospace.patch
+OK GPP_STAGE: qtopia-free-2.2.0-0006-24Aug2006-native-endian-audio.patch
+OK GPP_STAGE: qtopia-free-2.2.0-0007-24Aug2006-standard-touchscreen.patch
+OK GPP_STAGE: qtopia-free-2.2.0-0009-24Aug2006-mx21-buttons.patch
+OK GPP_STAGE: qtopia-free-2.2.0-0010-24Aug2006-dfltmouse-tpanel-and-screensaver.patch
+OK GPP_STAGE: qtopia-free-2.2.0-0011-24Aug2006-mxc-platform.patch
+OK GPP_STAGE: qtopia-free-2.2.0-0012-24Aug2006-mpc5200-platform.patch
+OK GPP_STAGE: qtopia-free-2.2.0-0013-08Sep2006-mx21-platform.patch
+OK GPP_STAGE: qtopia-free-2.2.0-0014-29Aug2006-gcc-4.1.1.patch
+OK GPP_STAGE: qtopia-free-2.2.0-0015-05Sep2006-keep_cursor.patch
+OK GPP_STAGE: qtopia-free-2.2.0-taskbar.patch
+OK GPP_STAGE: qtopia-free-2.2.0-linux_input_h
+OK GPP_STAGE: qtopia-free-2.2.0-ppc64-compiler-include-2.patch
+OK GPP_STAGE: qtopia-free-2.2.0-disable-dqt-options.patch
+OK GPP_STAGE: qtopia-free-2.2.0-headers-2.patch
+OK GPP_STAGE: qtopia-free-2.2.0-64bithost.patch
+
+checking: qtopia-4
+====================
+License: GPL
+OK GPP_STAGE: qtopia-opensource-src-4.3.0.tar.gz
+OK GPP_STAGE: qtopia-opensource-4.3.0-qconfig-cursor-mouse-01.patch
+OK GPP_STAGE: qtopia-opensource-4.3.0-native-endian-audio-01.patch
+OK GPP_STAGE: qtopia-opensource-4.3.0-standard-touchscreen-01.patch
+OK GPP_STAGE: qtopia-opensource-4.3.0-imx21-touchscreen-01.patch
+OK GPP_STAGE: qtopia-opensource-4.3.0-mx21-buttons-01.patch
+OK GPP_STAGE: qtopia-opensource-4.3.0-screensaver-01.patch
+OK GPP_STAGE: qtopia-opensource-4.3.0-mxc-platform-01.patch
+OK GPP_STAGE: qtopia-opensource-4.3.0-imx21-platform-01.patch
+OK GPP_STAGE: qtopia-opensource-4.3.0-gstreamer-01.patch
+OK GPP_STAGE: qtopia-opensource-4.3.0-usbkeyboard.patch
+OK GPP_STAGE: qtopia-opensource-4.3.0-video-playback-01.patch
+OK GPP_STAGE: qtopia-opensource-4.3.0-open_with_O_CREAT_fix.patch
+
+checking: curl
+================
+License: MIT License
+OK GPP_STAGE: curl-7.16.2.tar.gz
+
+checking: tinyproxy
+=====================
+License: GPL
+OK GPP_STAGE: tinyproxy-1.6.3.tar.gz
+
+checking: demo_launcher-mx21
+==============================
+License: GPL
+OK GPP_STAGE: demo_launcher-1.1.tar.gz
+
+checking: mcf54455-demo
+=========================
+License: GPL
+FAILED : mcf54455-demo-1.0.tar.gz
+mcf54455-demo-1.0.tar.gz not yet approved for distribution
+
+checking: nbench-byte
+=======================
+License: Not distributable, Copyright CMP Media LLC.
+
+checking: wangw
+=================
+License: Freescale Internal Use Only
+FAILED : wangw-1.0.4.tar.gz
+wangw-1.0.4.tar.gz not yet approved for distribution
+
+checking: swang-poc
+=====================
+License: GPL
+FAILED : swang-poc-1.0.tar.gz
+swang-poc-1.0.tar.gz not yet approved for distribution
+
+checking: nfs-utils
+=====================
+License: GPL
+OK GPP_STAGE: nfs-utils-1.1.0.tar.bz2
+OK GPP_STAGE: 001-no-getgrouplist.patch
+
+checking: dhrystone
+=====================
+License: Not distributable
+
+checking: net-snmp
+====================
+License: BSD and BSD-like
+OK GPP_STAGE: net-snmp-5.4.1.tar.gz
+
+checking: peak-linux-driver
+=============================
+License: GPL
+OK GPP_STAGE: peak-linux-driver.3.17.tar.gz
+OK GPP_STAGE: peak-linux-driver-3.17-mpc5200.patch
+OK GPP_STAGE: peak-linux-driver-3.17-mpc5200-platform_driver.patch
+
+checking: logrotate
+=====================
+License: GPL
+OK GPP_STAGE: logrotate-3.7.4.tar.gz
+OK GPP_STAGE: logrotate-selinux.patch
+OK GPP_STAGE: logrotate-fdLeak.patch
+
+checking: evtest
+==================
+License: GPL
+OK GPP_STAGE: evtest-1.23.tar.gz
+
+checking: rt-tests
+====================
+License: GPLv2
+OK GPP_STAGE: rt-tests-0.19.tar.gz
+
+checking: zaptel
+==================
+License: GPL
+OK GPP_STAGE: zaptel-1.4.11.tar.gz
+OK GPP_STAGE: zaptel_rpm_devices.tmpl
+OK GPP_STAGE: zaptel-1.4.11-cross.patch
+OK GPP_STAGE: zaptel-1.4.11-hrt-arch.patch
+OK GPP_STAGE: zaptel-1.4.11-makefw.patch
+OK GPP_STAGE: zaptel-1.4.11-printmodes.patch
+
+checking: asterisk
+====================
+License: GPL
+OK GPP_STAGE: asterisk-1.4.21.1.tar.gz
+OK GPP_STAGE: asterisk-1.4.21.1-cross.patch
+
+checking: asterisk-gui
+========================
+License: GPL
+OK GPP_STAGE: asterisk-gui-2.0.4.tar.gz
+
+checking: liberation-fonts
+============================
+License: GPL+exception
+OK GPP_STAGE: liberation-fonts.tar.gz
+
+checking: input-utils
+=======================
+License: GPL
+OK GPP_STAGE: input-utils-2007.06.22.tar.bz2
+
+checking: cantest
+===================
+License: GPL
+OK GPP_STAGE: cantest-1.0.tar.gz
+OK GPP_STAGE: cantest-1.0.patch
+OK GPP_STAGE: cantest-1.0-uClinux.patch
+OK GPP_STAGE: cantest-1.0-cansend-1.patch
+OK GPP_STAGE: cantest-1.0-cansend-debug.patch
+
+checking: rtc-test
+====================
+License: GPL
+
+checking: netcat
+==================
+License: Public domain
+OK GPP_STAGE: nc110.tgz
+OK GPP_STAGE: netcat-1.10-res_init.patch
+
+checking: gpsd
+================
+License: BSD
+OK GPP_STAGE: gpsd-2.37.tar.gz
+OK GPP_STAGE: gpsd-2.37-for-uclinux.patch
+
+checking: xfsprogs
+====================
+License: GPL
+OK GPP_STAGE: xfsprogs-2.8.18-1.tar.gz
+
+checking: fbset
+=================
+License: GPL
+OK GPP_STAGE: fbset-2.1.tar.gz
+OK GPP_STAGE: fbset_2.1-23.diff.gz
+
+checking: fbv
+===============
+License: GPL
+OK GPP_STAGE: fbv-1.0b.tar.gz
+OK GPP_STAGE: fbv-multi-planes.patch
+
+checking: fbpan
+=================
+License: GPL
+OK GPP_STAGE: fbpan-1.0.tar.gz
+
+checking: statserial
+======================
+License: GPL
+OK GPP_STAGE: statserial_1.1.orig.tar.gz
+OK GPP_STAGE: statserial_1.1-22.diff.gz
+
+checking: keyfuzz
+===================
+License: GPL
+OK GPP_STAGE: keyfuzz-0.2.tar.gz
+
+checking: ffmpeg
+==================
+License: LGPL
+OK GPP_STAGE: ffmpeg-20080916.tar.bz2
+
+checking: sysstat
+===================
+License: GPL
+OK GPP_STAGE: sysstat-9.0.3.tar.gz
+
+checking: cpufrequtils
+========================
+License: GPL
+OK GPP_STAGE: cpufrequtils-005.tar.bz2
+
+checking: tclap
+=================
+License: MIT
+OK GPP_STAGE: tclap-1.1.0.tar.gz
+OK GPP_STAGE: tclap-1.1.0-gcc4.4.patch
+
+checking: lm_sensors
+======================
+License: GPL
+OK GPP_STAGE: lm_sensors-3.0.3.tar.bz2
+
+checking: hal
+===============
+License: GPL
+OK GPP_STAGE: hal-0.5.10.tar.gz
+OK GPP_STAGE: hal-0.5.10-cross-compile-fixes.patch
+
+checking: sdl
+===============
+License: LGPL
+OK GPP_STAGE: SDL-1.2.13.tar.gz
+
+checking: libogg
+==================
+License: BSD
+OK GPP_STAGE: libogg-1.1.3.tar.gz
+
+checking: libvorbis
+=====================
+License: BSD
+OK GPP_STAGE: libvorbis-1.2.0.tar.gz
+
+checking: libtheora
+=====================
+License: BSD
+OK GPP_STAGE: libtheora-1.0.tar.bz2
+
+checking: libdaemon
+=====================
+License: LGPL
+OK GPP_STAGE: libdaemon-0.13.tar.gz
+
+checking: libxml++
+====================
+License: LGPL
+OK GPP_STAGE: libxml++-1.0.5.tar.gz
+
+checking: json-c
+==================
+License: MIT
+OK GPP_STAGE: json-c-0.8.tar.gz
+
+checking: dbg
+===============
+License: LGPL
+OK GPP_STAGE: dbg-1.20.tgz
+OK GPP_STAGE: dbg-1.20-1246985442.patch
+
+checking: cgicc
+=================
+License: LGPL
+OK GPP_STAGE: cgicc-3.2.3.tar.gz
+OK GPP_STAGE: cgicc-3.2.3-gcc4.patch
+
+checking: giflib
+==================
+License: MIT
+OK GPP_STAGE: giflib-4.1.6.tar.bz2
+
+checking: help2man
+====================
+License: GPL
+OK GPP_STAGE: help2man-1.36.4.tar.gz
+
+checking: gzip
+================
+License: GPL
+OK GPP_STAGE: gzip-1.3.5.tar.gz
+
+checking: xorg-x11-proto-devel
+================================
+License: MIT
+OK GPP_STAGE: dmxproto-2.2.2.tar.bz2
+OK GPP_STAGE: evieext-1.0.2.tar.bz2
+OK GPP_STAGE: glproto-1.4.9.tar.bz2
+OK GPP_STAGE: inputproto-1.5.0.tar.bz2
+OK GPP_STAGE: randrproto-1.3.0.tar.bz2
+OK GPP_STAGE: trapproto-3.4.3.tar.bz2
+OK GPP_STAGE: xextproto-7.0.5.tar.bz2
+OK GPP_STAGE: xf86dgaproto-2.0.3.tar.bz2
+OK GPP_STAGE: xf86miscproto-0.9.2.tar.bz2
+OK GPP_STAGE: xf86rushproto-1.1.2.tar.bz2
+OK GPP_STAGE: xf86vidmodeproto-2.2.2.tar.bz2
+OK GPP_STAGE: xineramaproto-1.1.2.tar.bz2
+OK GPP_STAGE: xproto-7.0.15.tar.bz2
+OK GPP_STAGE: xproxymanagementprotocol-1.0.2.tar.bz2
+OK GPP_STAGE: dri2proto-1.1.tar.bz2
+OK GPP_STAGE: encodings-1.0.2.tar.bz2
+OK GPP_STAGE: font-cursor-misc-1.0.0.tar.bz2
+OK GPP_STAGE: font-misc-misc-1.0.0.tar.bz2
+
+checking: xorg-server
+=======================
+License: X11
+OK GPP_STAGE: xorg-server-1.6.1.tar.bz2
+FAILED : xorg-server-disable-lcd-auto-blank.patch
+xorg-server-disable-lcd-auto-blank.patch not yet approved for distribution
+
+checking: eet
+===============
+License: BSD
+OK GPP_STAGE: eet-1.1.0.tar.bz2
+
+checking: embryo
+==================
+License: BSD
+OK GPP_STAGE: embryo-0.9.9.050.tar.bz2
+
+checking: edb
+===============
+License: BSD
+OK GPP_STAGE: edb-1.0.5.042.tar.bz2
+
+checking: evas
+================
+License: BSD
+OK GPP_STAGE: evas-0.9.9.050.tar.bz2
+
+checking: expedite
+====================
+License: BSD
+OK GPP_STAGE: expedite-0.6.0.tar.bz2
+
+checking: ecore
+=================
+License: BSD
+OK GPP_STAGE: ecore-0.9.9.050.tar.bz2
+
+checking: efreet
+==================
+License: BSD
+OK GPP_STAGE: efreet-0.5.0.050.tar.bz2
+OK GPP_STAGE: efreet-0.5.0.050-host_name_max.patch
+
+checking: edje
+================
+License: BSD
+OK GPP_STAGE: edje-0.9.9.050.tar.bz2
+
+checking: emotion
+===================
+License: BSD
+OK GPP_STAGE: emotion-0.1.0.042.tar.bz2
+
+checking: enlightenment
+=========================
+License: BSD
+OK GPP_STAGE: enlightenment-0.16.999.050.tar.bz2
+OK GPP_STAGE: enlightenment-0.16.999.050-host_name_max.patch
+
+checking: sqlite
+==================
+License: Public Domain
+OK GPP_STAGE: sqlite-amalgamation-3.6.12.tar.gz
+
+checking: evolution-data-server
+=================================
+License: LGPL
+OK GPP_STAGE: evolution-data-server-2.24.0.tar.bz2
+OK GPP_STAGE: evolution-data-server-2.24.0-configure-cross-compile-fix.patch
+
+checking: lightmediascanner
+=============================
+License: BSD
+OK GPP_STAGE: lightmediascanner-0.2.0.0.tar.bz2
+
+checking: xorg-x11-twm
+========================
+License: MIT/X11
+OK GPP_STAGE: twm-1.0.3.tar.bz2
+
+checking: xorg-x11-xkb-utils
+==============================
+License: MIT/X11
+OK GPP_STAGE: xkbutils-1.0.1.tar.bz2
+OK GPP_STAGE: xkbcomp-1.0.2.tar.bz2
+OK GPP_STAGE: xkbevd-1.0.2.tar.bz2
+OK GPP_STAGE: xkbprint-1.0.1.tar.bz2
+OK GPP_STAGE: setxkbmap-1.0.4.tar.bz2
+
+checking: xterm
+=================
+License: MIT
+OK GPP_STAGE: xterm-234.tgz
+OK GPP_STAGE: 16colors.txt
+OK GPP_STAGE: xterm.desktop
+OK GPP_STAGE: xterm-223-resources.patch
+OK GPP_STAGE: xterm-222-can-2003-0063.patch
+OK GPP_STAGE: xterm-226-man-page_paths.patch
+
+checking: xorg-x11-drv-keyboard
+=================================
+License: MIT
+OK GPP_STAGE: xf86-input-keyboard-1.3.2.tar.bz2
+
+checking: libXxf86dga
+=======================
+License: MIT/X11
+OK GPP_STAGE: libXxf86dga-1.0.2.tar.bz2
+
+checking: libXrandr
+=====================
+License: X11
+OK GPP_STAGE: libXrandr-1.3.0.tar.bz2
+
+checking: libXi
+=================
+License: MIT
+OK GPP_STAGE: libXi-1.1.4.tar.bz2
+
+checking: libXfixes
+=====================
+License: MIT
+OK GPP_STAGE: libXfixes-4.0.3.tar.bz2
+
+checking: libXcursor
+======================
+License: MIT
+OK GPP_STAGE: libXcursor-1.1.9.tar.bz2
+
+checking: fltk2
+=================
+License: LGPL with exceptions
+OK GPP_STAGE: fltk-2.0.x-r6793.tar.bz2
+OK GPP_STAGE: fltk-2.0.x-fixfontcrash.patch
+
+checking: dillo2
+==================
+License: GPL
+OK GPP_STAGE: dillo-2.1.tar.bz2
+OK GPP_STAGE: dillo-2.1-cross.patch
+
+checking: libmatchbox
+=======================
+License: LGPL
+OK GPP_STAGE: libmatchbox-1.9.tar.bz2
+
+checking: matchbox-common
+===========================
+License: GPL
+OK GPP_STAGE: matchbox-common-0.9.1.tar.bz2
+
+checking: matchbox-wm
+=======================
+License: GPL
+OK GPP_STAGE: matchbox-window-manager-1.1.tar.bz2
+
+checking: matchbox-desktop
+============================
+License: GPL
+OK GPP_STAGE: matchbox-desktop-0.9.1.tar.bz2
+
+checking: matchbox-panel
+==========================
+License: GPL
+OK GPP_STAGE: matchbox-panel-0.9.3.tar.bz2
+
+checking: iso-codes
+=====================
+License: LGPLv2+
+OK GPP_STAGE: iso-codes-3.3.tar.bz2
+
+checking: totem-pl-parser
+===========================
+License: LGPL
+OK GPP_STAGE: totem-pl-parser-2.26.2.tar.bz2
+
+checking: totem
+=================
+License: LGPL
+OK GPP_STAGE: totem-2.26.2.tar.bz2
+OK GPP_STAGE: totem-2.26.2-cross-compile-fixes.patch
+
+checking: gnome-desktop
+=========================
+License: LGPL
+OK GPP_STAGE: gnome-desktop-2.24.2.tar.bz2
+OK GPP_STAGE: gnome-desktop-2.24.2-cross-compile-fixes.patch
+
+checking: eog
+===============
+License: GPL
+OK GPP_STAGE: eog-2.24.2.tar.bz2
+OK GPP_STAGE: eog-2.24.2-cross-compile-fixes.patch
+
+checking: enchant
+===================
+License: LGPL
+OK GPP_STAGE: enchant-1.2.5.tar.gz
+
+checking: gtkhtml
+===================
+License: LGPL
+OK GPP_STAGE: gtkhtml-3.24.2.tar.bz2
+
+checking: evolution
+=====================
+License: LGPL
+OK GPP_STAGE: evolution-2.24.0.tar.bz2
+OK GPP_STAGE: evolution-2.24.0-cross-compile-fixes.patch
+
+checking: eel
+===============
+License: LGPL
+OK GPP_STAGE: eel-2.24.0.tar.bz2
+OK GPP_STAGE: eel-2.24.0-cross-compile-fixes.patch
+
+checking: librsvg
+===================
+License: LGPL
+OK GPP_STAGE: librsvg-2.22.3.tar.bz2
+
+checking: nautilus
+====================
+License: LGPL
+OK GPP_STAGE: nautilus-2.24.2.tar.bz2
+
+checking: cheese
+==================
+License: GPL
+OK GPP_STAGE: cheese-2.24.2.tar.gz
+OK GPP_STAGE: cheese-2.24.2-cross-compile-fixes.patch

@@ -1,0 +1,274 @@
+%TOPICTITLE%
+---
+See also: LtibFaq
+
+%TOC%
+
+---+ Importing srpm packages
+
+This is a note that explains the mechanics of importing source
+rpm files into LTIB.  This is usually quicker that manually
+creating spec files and downloading content from the upstream
+package maintainer.
+
+---++ What is the process
+
+---+++ Find out  if the package already exists
+
+First of all, look to see if LTIB already has this package.  If not
+as on the LTIB mailing list whether or not there is some other
+package that implements the feature/command you need.
+
+---+++ If not, get approval to add the new package
+
+If there is no package that meets your need, and it is agreed on
+the mailing list that you can add your package.
+
+If you are not already on the LTIB mailing list, please join by
+following the instructions here:
+
+http://sourceforge.freescale.net/mailman/listinfo/ltib-users
+
+---+++ Locate the srpm for the package you want to add
+
+Currently, the recommended place to get srpms from is the Fedora 9
+srpm repostory here:
+
+http://download.fedora.redhat.com/pub/fedora/linux/releases/9/Fedora/source/SRPMS/
+
+---+++ Download the package
+
+If you can find the package you want, download it from the FC9 repository
+with your browser and save it as a file. 
+
+---+++ Import into LTIB
+
+LTIB has a semi-automated import mechanism.  You will need to have
+an existing instance of LTIB installed and configured/build. Once
+you have that you run the -m addsrpms command (see later).
+
+---+++ Fixup the spec file
+
+The import mechanism is never perfect, you will need to look at the
+converted FC9 spec file and adjust approrpiate.  For example tags/macros
+such as 6%{?dist} will need to be cleaned up.
+
+---+++ Test build your new package
+
+Build the newly imported package using: *$./ltib -p _pkg_*
+
+---+++ Add any required patches or build fixes
+
+Sometimes packages may need small source code adjustments to fix
+them up.  Details on how to modify code and capture the patches
+is given in the LtibFaq in the section
+*How do I make changes to a package and capture them*
+
+Note also that it's often necessary to add the clause:
+<verbatim>
+find $RPM_BUILD_ROOT/%{pfx}/%{_prefix}/lib/ -name "*.la" | xargs rm -f
+</verbatim>
+after the *make install...* target in the install section if your
+new package creates .la files in the root filesystem.
+
+---+++ Test your package on the target
+
+Once your package is building okay, you should boot your target
+and test the new package is working correctly.
+
+---+++ Save your work
+
+When you are done, you need to upload each source/tarball for your
+package to the PPP.  This can be done by using the link here:
+http://auslxsc01.mtwk.freescale.net/ltib-cgi/ppp_upload.cgi
+
+You can get a listing of all the files/patches for a package that have
+not been uploaded by running the command: *$ ./ltib -p _pkg_ --dltest*
+
+Once you have uploaded all the content, you then need to add your
+new package spec file to git repository.  To do this, you'd typically do this:
+<verbatim>
+$ git status
+$ git add .
+</verbatim>
+
+*Note* that the import will have also updated *packages.lkc* and *pkg_map*.  It
+is often a good idea to check these changes before you do the final 
+*commit*.  For non-graphical packages, I recommend moving the 
+entry for your package just before the line: *# X server related stuff*
+
+When you have done all this, run the command: 
+<verbatim>
+$ git status
+$ git commit -a -m "commit log message"
+$ git push <username>@git.am.freescale.net:/git/ltib.git <branch>
+</verbatim>
+
+---++ Note: turning on the package in the config system
+
+You can temporarily add a package to a root filesystem for NFS
+test deployment by just using: *$ ./ltib -p _pkg_* however, next time
+you run just *$ ./ltib* that package will be removed as it won't be
+turned on in your platform's configuration (it's new).
+
+If you want to turn your package on, just run: *$ ./ltib --configure*
+and find your package in the package list and enabled it.  If you
+want to make this the default for your platform, you need to 
+update your file *config/platform/_target_/defconfig*.  Often
+this can be achived by getting your system configured exactly as
+you want, and then doing the following:
+<verbatim>
+$ cp config/platform/_target_/defconfig.dev config/platform/_target_/defconfig
+
+$ git commit -a -m "update defconfig"
+$ git push <username>@git.am.freescale.net:/git/ltib.git <branch>
+</verbatim>
+
+
+---++ Adding the package 'at', a worked example
+
+---+++ Find the package and download it:
+
+I looked at the Fedora repository and found it here:
+http://download.fedora.redhat.com/pub/fedora/linux/releases/9/Fedora/source/SRPMS/at-3.1.10-23.fc9.src.rpm
+
+---+++ Import into LTIB
+
+<verbatim>
+$ ./ltib -m addsrpms /home/seh/zip-2.31-6.fc9.src.rpm
+importing /home/seh/zip-2.31-6.fc9.src.rpm to /home/seh/ltib_bsps/dev/rpm
++ rpm --dbpath /var/lib/rpm --define '_topdir /home/seh/ltib_bsps/dev/rpm' -ivh /home/seh/zip-2.31-6.fc9.src.rpm
+   1:zip                    ########################################### [100%]
+$
+</verbatim>
+
+---++++ What did this do
+
+Running this command split apart the srpm file copied out the content
+to /opt/freescale/pkgs:
+<verbatim>
+/opt/freescale/pkgs/zip231.tar.gz
+/opt/freescale/pkgs/zcrypt29.tar.gz
+/opt/freescale/pkgs/zip23.patch
+/opt/freescale/pkgs/exec-shield.patch
+/opt/freescale/pkgs/zip23-umask.patch
+/opt/freescale/pkgs/zip-2.3-currdir.patch
+/opt/freescale/pkgs/zip-2.31-install.patch 
+/opt/freescale/pkgs/zip-2.31-near-4GB.patch
+/opt/freescale/pkgs/zip-2.31-configure.patch
+/opt/freescale/pkgs/zip-2.31-time.patch exists
+/opt/freescale/pkgs/zip-2.3-sf.patch exists
+/opt/freescale/pkgs/zip-2.31-umask_mode.patch
+</verbatim>
+
+It created a spec file:
+<verbatim>
+dist/lfs-5.1/zip/zip.spec
+</verbatim>
+
+It also updated *config/userspace/pkg_map*:
+<verbatim>
+ PKG_XORG_X11_PROTO_DEVEL         = xorg-x11-proto-devel
++PKG_ZIP = zip
+</verbatim>
+
+And it updated *config/userspace/packages.lkc*:
+<verbatim>
++config PKG_ZIP
++    depends CAP_HAS_MMU
++    bool "zip"
++    help
++      A file compression and packaging utility compatible with PKZIP
++
+ config PKG_ZLIB
+</verbatim>
+
+
+---+++ clean up the spec file.
+
+I looked at dist/lfs-5.1/zip/zip.spec to and cleaned it up.  I removed
+some spurious empty lines.  I also removed the Fedora 'dist' tags which 
+are unknown outside Fedora (%{?dist})
+
+I also spotted typo from the original spec file in the install section.
+They had: $RPM_BULD_ROOT, but should have had $RPM_BUILD_ROOT/%{_mandir}/man1
+
+Actually this line and the one above were not actually needed at all
+as the 'make install' creates these.
+
+---+++ A trial build
+
+I ran:
+<verbatim>
+$ ./ltib -p zip
+</verbatim>
+
+I noticed that I got some warnings:
+
+<verbatim>
+Processing: zip
+=================
+can't complete variable reduction on: ?dist
+can't complete variable reduction on: ?dist ?_smp_mflags
+Build path taken because: no prebuilt rpm,
+</verbatim>
+
+So I aborted the build and removed these tags from the spec file (they're
+not needed).
+
+I re-ran and saw some more warnings:
+<verbatim>
+Try zip231.tar.gz.md5 from the PPP
+http://auslxsc01.mtwk.freescale.net/ppp/zip231.tar.gz.md5:
+17:52:35 ERROR 404: Not Found.
+</verbatim>
+
+This is okay, these will resolved after you have uploaded to the PPP
+(the upload process creates the .md5 files).
+
+---+++ Check the packaging (file list)
+
+After I got the package building, I did a quick check to see the
+files are in the right place:
+
+<verbatim>
+$ rpm --root `pwd`/rootfs -ql zip
+//usr
+//usr/bin
+//usr/bin/zip
+//usr/bin/zipcloak
+//usr/bin/zipnote
+//usr/bin/zipsplit
+//usr/share
+//usr/share/man
+//usr/share/man/man1
+//usr/share/man/man1/zip.1
+</verbatim>
+
+This is listed relative to the chroot of `pwd`/rootfs and looks fine
+
+---+++ Final steps.
+
+Follow the guidelines above and upload the tarball/patches to the PPP
+and then do a git push after checking that 'git status' looks 
+correct.  Don't forget to 'git add' the new spec file/directory.
+
+---++ Try this yourself if you like
+
+I've not actually commited this package to git and PPP, so you can try
+this yourself as a tutorial if you like.
+
+When you're done, remember to clean-up the work (and not save the tutorial):
+
+<verbatim>
+$ rm config/userspace/packages.lkc config/userspace/pkg_map
+$ rm -rf dist/lfs-5.1/zip
+
+$ git pull
+$ git rebase <branch>
+</verbatim>
+
+
+---
+-- Main.StuartHughes - Main.HonghuaYin
+

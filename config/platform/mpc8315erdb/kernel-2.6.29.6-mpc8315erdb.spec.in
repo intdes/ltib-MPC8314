@@ -1,0 +1,100 @@
+# Template = kernel-common.tmpl
+
+%define pfx /opt/freescale/rootfs/%{_target_cpu}
+%define pkg_name linux
+
+Summary         : Linux kernel (core of the Linux operating system)
+Name            : kernel
+Version         : 2.6.29.6
+Release         : 10
+License         : GPL V2
+Vendor          : Freescale Semiconductor
+Packager        : Jing Yang
+Group           : System Environment/Kernel
+Source          : %{pkg_name}-%{version}.tar.bz2
+Patch1          : 0002-skb-for-mpc8315erdb.patch
+Patch2          : 0003-pcie-support-for-mpc8315erdb.patch
+Patch3          : 0004-adjust-parse_mtd_partitions.patch
+Patch4          : 0005-Codewarrior-kernel-debug-for-mpc8315erdb.patch
+Patch5          : %{name}-%{version}-power-management-support-for-mpc8315erdb.patch
+Patch6          : 0007-fsl-sata-power-management-for-mpc8315erdb.patch
+Patch7          : 0008-fsl-usb-power-management-for-mpc8315erdb.patch
+Patch8          : %{pkg_name}-%{version}-wakeup-by-GTM-timer4-for-mpc8315-PM-nort.patch
+Patch9          : 0010-LFC-support-for-mpc8315erdb.patch
+Patch10         : 0011-fixed-the-large-file-transfer-issue-of-sata.patch
+Patch11         : %{pkg_name}-%{version}-TDM-support-for-mpc8315erdb-nort.patch
+Patch12         : %{pkg_name}-%{version}-tdm-test-modules-for-mpc8315erdb-nort.patch
+Patch13         : %{name}-%{version}-spi-support-for-the-tdm-module-of-mpc8315erdb.patch
+Patch14         : 0015-pcie-ep-demo-support-for-mpc8315erdb.patch
+Patch15         : %{name}-%{version}-ieee-1588-v1-driver-for-mpc8315erdb.patch
+Patch16         : %{name}-%{version}-ieee-1588-v2-driver-for-mpc8315erdb.patch
+Patch17         : %{pkg_name}-%{version}-otg-support-for-mpc8315erdb-nort.patch
+Patch18         : 0018-fix-a-bug-on-ehci_turn_off_all_ports.patch
+Patch19         : 0019-sata_fsl-hard-and-soft-reset-split.patch
+Patch20         : 0020-sata_fsl-Add-asynchronous-notification-support.patch
+Patch21         : 0001-Add-Freescale-SEC23DRV-package.patch
+Patch22         : 0022-port-SEC23DRV-to-linux-v2.6.z.patch
+Patch23         : 0023-enable-SEC23DRV-for-mpc8315erdb.patch
+Patch24         : 0024-DMA-XOR-support-for-mpc8315erdb.patch
+Patch25         : 0025-USB-fslusb-Initialize-unused-endpoints-as-bulk.patch
+Patch26         : 0026-yaffs2-support-for-mpc8315erdb.patch
+Patch27         : %{name}-%{version}-the-DTS-support-for-mpc8315erdb.patch
+Patch28         : %{name}-%{version}-fix-a-bug-of-Intel-PRO-1000-PCI-Express-Gigabit-Ethernet-driver.patch
+Patch29         : %{name}-%{version}-add-usb-device-dts.patch
+Patch30         : %{pkg_name}-%{version}-mtd-eLBC-NAND-increase-bus-timeout-to-max.patch
+Patch31         : %{pkg_name}-%{version}-mtd-eLBC-NAND-use-recommended-cmd-sequences.patch
+Patch32         : %{pkg_name}-2.6.29-MPC8315-Update-SKB-recycling-1.1.4-to-1.1.5.patch
+Patch33         : %{pkg_name}-2.6.29-MPC8315-fast-route.patch
+Patch34         : %{pkg_name}-2.6.32-P2020DS-0001-Delay-async-readahead.patch
+Patch35         : %{pkg_name}-2.6.29-MPC8315-Sendpages.patch
+Patch36         : %{pkg_name}-2.6.29-MPC8315-eTSEC-TSO.patch
+Patch37         : %{pkg_name}-2.6.29-MPC8315-TSO-recycle-SKB.patch
+Patch38         : %{pkg_name}-%{version}-sata-fsl-fix-ATAPI-issue-with-PMP.patch
+Patch39         : %{pkg_name}-%{version}-mpc8315erdb-disable-the-GTM-in-default-cfg.patch
+BuildRoot       : %{_tmppath}/%{name}
+Prefix          : %{pfx}
+
+%Description
+%{summary}
+
+%Prep
+%setup -n %{pkg_name}-%{version}
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
+%patch9 -p1
+%patch10 -p1
+%patch11 -p1
+%patch12 -p1
+%patch13 -p1
+%patch14 -p1
+%patch15 -p1
+%patch16 -p1
+%patch17 -p1
+%patch18 -p1
+%patch19 -p1
+%patch20 -p1
+%patch21 -p1
+%patch22 -p1
+%patch23 -p1
+%patch24 -p1
+%patch25 -p1
+%patch26 -p1
+%patch27 -p1
+%patch28 -p1
+%patch29 -p1
+%patch30 -p1
+%patch31 -p1
+%patch32 -p1
+%patch33 -p1
+%patch34 -p1
+%patch35 -p1
+%patch36 -p1
+%patch37 -p1
+%patch38 -p1
+%patch39 -p1

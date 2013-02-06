@@ -1,0 +1,422 @@
+#!/usr/bin/expect
+
+######################################################################
+#
+# Copyright © Freescale Semiconductor, Inc. 2007-2009. All rights reserved.
+#
+# Stuart Hughes, stuarth@freescale.com, July 2007
+#
+# This file is part of LTIB.
+#
+# LTIB is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# LTIB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with LTIB; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+#
+# This file is a set of functions to support auto-deployment 
+#
+######################################################################
+
+proc uip { str } {
+    # clear the input buffer
+    set timeout 1
+    while 1 {
+        expect_user  "*\n" { } timeout { break }
+    }
+    set timeout -1
+    stty -echo
+    send_user "== USER INPUT: $str : "
+    expect_user "*\n" { }
+    send_user "ok\n"
+    stty echo 
+}
+
+proc msg { str } {
+    global commentary
+    if { $commentary } {
+        send_user "==: $str"
+    }
+}
+
+proc do_interact { } {
+    send_user "==: Dropping to interactive mode, type: +++<enter> to exit\n"
+    send "\r"
+    interact "+++\r" return
+}
+
+proc eexit { str } {
+    global interact scriptname eexit_done
+    if [info exists eexit_done] {
+        exit 1
+    }
+    set eexit_done 1
+    set lvl [info level]
+    if { $lvl == 1 } {
+        set caller "main"
+    } else {
+        set caller [lindex [info level -1] 0]
+    }
+    send_error "==: FAIL: $scriptname : $caller : $str"
+    if { $interact } {
+       do_interact
+    }
+    if { [string compare $caller "off"] != 0 } {
+        off
+    }
+    exit 1
+}
+
+proc passed { } {
+    global interact scriptname
+    send_user "==: PASS : $scriptname\n"
+    if { $interact } {
+       do_interact
+    }
+    off
+    exit 0
+}
+
+proc setup_vars { } {
+    global argc argv
+    if { $argc > 0 } {
+        uplevel #0 source "[lindex $argv 0]"
+    }
+    set defaults "[file dir [info script]]/adeploylib.default"
+    if { [file exists $defaults] } {
+        uplevel #0 source $defaults
+    }
+    return 1
+}
+
+proc off { } {
+     global controller tty baud board scriptadir
+     switch $controller \
+         local   { power_manual off 
+     }   llab    { power_llab   off full
+     }   default { eexit "unknown controller $controller\n"
+     }
+     return 1
+}
+
+proc cycle { args } {
+     if { [llength $args] } {
+         set style [lindex $args 0]
+     } else {
+         set style full
+     }
+
+     global controller tty baud board scriptadir timeout
+     msg "power cycle board\n"
+     switch $controller \
+         local   { power_manual cycle
+     }   llab    { power_llab   cycle $style
+     }   default { eexit "unknown controller $controller\n"
+     }
+     return 1
+}
+
+proc connect { } {
+     global controller localtty baud spawn_id board scriptadir
+     msg "connect\n"
+
+     switch $controller \
+         local   { serial_connect $localtty $baud 
+     }   llab    { spawn $scriptadir/llab serial connect $board
+     }   default { eexit "unknown controller $controller\n"
+     }
+     return 1
+}
+
+proc power_manual { action } {
+     set timeout -1
+     switch -glob -- $action \
+         cycle   { uip "please turn the power off then on, then press <enter>"
+     }   off     { uip "please turn the power off, then press <enter>"
+     }   on      { uip "please turn the power on,  then press <enter>"
+     }   default { eexit "unknown action $action\n"
+     }
+     return 1
+}
+
+proc power_llab { action style } {
+    global board scriptadir spawn_id
+    set timeout 10
+    switch -glob -- $action \
+        cycle {
+            if { [string compare $style "full"] == 0 } {
+                spawn $scriptadir/llab power reset $board
+                expect {
+                         "Power sequence complete\r\n$"        {}
+                          -re "\[^\r]*\r\n" { exp_continue      }
+                          default { eexit "llab reset failed\n" }
+                }
+                catch close ; catch wait
+            } else {
+                msg "inline power cycle\n"
+                send "\01r"
+                expect {
+                    "Power sequence complete\r\n$"                 {}
+                     -re "\[^\r]*\r\n" { exp_continue            }
+                     default      { eexit "inline power cycle failed\n" }
+                }
+            }
+     } off {
+         if { [info exists spawn_id] } {
+             msg "closing existing connection\n"
+             catch close ; wait
+         }
+         spawn $scriptadir/llab power off $board 
+         expect {
+                   "Power sequence complete\r\n$"     {} 
+                    -re "\[^\r]*\r\n" { exp_continue    }
+                   default { eexit "llab off failed\n" }
+         }
+         catch close ; wait
+    }  default { eexit "unknown action $action\n"
+    }
+}
+
+proc serial_connect { tty baud } {
+    global spawn_id
+    if { [catch { spawn -noecho -open [open $tty w+]  } error] } {
+        eexit "Unable to connect to $tty\n   \$error\n"
+    }
+	stty $baud sane raw -echo cs8 -parenb -cstopb < $tty
+    msg "Serial connection to: $tty,$baud\n"
+    return 1
+}
+
+proc get_boot_control { prompt } {
+    # look for some output, normally after a power up.  Ignore
+    # any lines starting '-- ' as these are from the llab script
+    # if using a non-local board.  If no output is see after timeout
+    # re-try a power cycle 3 times more before giving up
+    set timeout 10
+    set count 0
+    send " \r"
+    expect {
+        -re "^\r\r?\n"           { exp_continue }
+        -re "^-- \[^\r]+\r?\r\n" { exp_continue }
+        -re "(\[^\r]+)\r?\r\n"   { msg "board is alive\n"}
+        default { 
+            incr count
+            if { $count < 3 } {
+                msg "no output, cycling power again ($count)\n"
+                cycle inline
+                exp_continue
+            }
+            eexit "Power cycle retries exceeded, giving up\n"
+        }  
+    }
+
+    # send an initial 'space return' in case power has not been cycled
+    set timeout 60
+    set count 0
+    set sent_reboot 0
+    send "\r"
+    expect {
+        "Hit any key to stop autoboot:" {                             #; u-boot
+            msg "sent space\n"; send " \r"; exp_continue
+        }
+        "== Executing boot script in*to abort\r\n" {                  #; RedBoot
+            msg "sent CTRL-C\n"; send "\003\r"; exp_continue
+        }
+        -re "(#|ogin:)\[ ]*$" {
+            if { $sent_reboot == 0 } {
+                msg "Assuming at linux is running, try a soft reboot\n"
+                if { [string compare $expect_out(1,string) "ogin:"] == 0 } {
+                    send "root\r"
+                    linux_login 30
+                }
+                send "reboot\r"
+                set sent_reboot 1
+            }
+            exp_continue
+        }
+        "$prompt$" {
+            set timeout 2
+            incr count
+            if { $count < 3 } {
+                msg "re-prompting\n"
+                send "\r"
+                exp_continue
+            }
+        }
+        -re "\[^\r]*\r\n" { exp_continue   }
+        default { eexit "timeout or eof\n" }
+    }
+    msg "got boot control\n"
+    return 1
+}
+
+proc linux_login { tout } {
+    set timeout $tout
+    set sent_pw 0
+    expect {
+        ogin:             { send "root\r" ; exp_continue }
+        sword:            { send "root\r" ; set sent_pw 1;  exp_continue }
+        "#\[ ]*$"         { if { ! $sent_pw } { exp_continue } }
+        "Login incorrect" { eexit "login failure\n" }
+        -re "\[^\r]*\r\n" { exp_continue } 
+        default {           eexit "timeout or error: booting kernel\n" }
+    }
+}
+
+proc boot { } {
+    global boot_cmd_file
+    set timeout 20
+    if [catch {open $boot_cmd_file} input] {
+        eexit "$input\n"
+    }  
+    gets $input prompt
+    get_boot_control $prompt 
+    exp_internal 0
+    msg "sending boot commands to board\n"
+    while { [gets $input line] != -1} {
+        regexp "$prompt\(.*\)" $line ignore cmd
+        set cmd [join [uplevel #0 list "$cmd"]]
+        ### msg "sending command: '$cmd'\n"
+        send "$cmd\r"
+        expect { 
+                 "\[\r\n]\[\r\n]Linux version 2"     { 
+                                  msg "kernel is booting\n"
+                                  break }
+                 "$cmd\r\r\nUnknown command*$prompt" { 
+                                  eexit $expect_out(0,string) }
+                 "$cmd\r\nInvalid*$prompt"           {
+                                  eexit $expect_out(0,string) }
+                 "$cmd\r\nError:*$prompt"            {
+                                  eexit $expect_out(0,string) }
+                 "Hit any key to stop autoboot:"            { eexit "reboot?\n"}
+                 "press SPACE to boot*ESC to recover:"      { eexit "reboot?\n"}
+                 "== Executing boot script in*to abort\r\n" { eexit "reboot?\n"}
+                 "$cmd*$prompt$" { }
+                 default        { eexit "timeout or error for: $cmd\n" }
+        }
+    }
+    close $input
+    linux_login 30 
+    msg "kernel booted okay\n"
+    return 1
+}
+
+proc ltib_cmd { cmd } {
+    global ltibdir dtbs dtbfile newkern bootfile
+    set timeout 300
+    set oldir [pwd]
+    cd $ltibdir
+    eval spawn -noecho { sh -c $cmd }
+        expect {
+        "Build Succeeded\r\n"  { msg "ltib profile built\n" }
+        -re "\[^\r]*\r\n"      { exp_continue   }
+        default                { eexit "error, timeout or eof:\n" }
+    }
+    catch close ; wait
+    cd $oldir
+
+    set dtbmtime 0
+    if { [file exists /tftpboot/$dtbfile] } {
+        set dtbmtime [file mtime /tftpboot/$dtbfile]
+    }
+    if { [info exists dtbs] && [file exists $dtbs] && [file mtime $dtbs] > $dtbmtime } {
+        msg "cp -f $dtbs /tftpboot/$dtbfile\n"
+        exec cp -f $dtbs /tftpboot/$dtbfile
+    }
+
+    set kernmtime 0
+    if { [file exists /tftpboot/$bootfile] } {
+        set kernmtime [file mtime /tftpboot/$bootfile]
+    }
+    if { ![file exists $newkern] && [file exists /tftpboot/$bootfile] } {
+        msg "WARNING: new kernel: $newkern does not exist, using old one\n"
+    } else {
+        if { [file mtime $newkern] > $kernmtime } {
+            msg "cp -f $newkern /tftpboot/$bootfile\n"
+            exec cp -f $newkern /tftpboot/$bootfile
+        }
+    }
+    return 1
+}
+
+proc test_setup { } {
+    global reboot rebuild scriptadir scriptname
+
+    if { $reboot == 0 } {
+        connect
+        return 1
+    }
+    if { $rebuild == 1 } {
+        msg "setting up LTIB for profile: $scriptname.profile\n"
+        if { [ file exists $scriptadir/$scriptname.profile ] } {
+            ltib_cmd "./ltib --profile $scriptadir/$scriptname.profile --batch"
+        } else {
+            ltib_cmd "./ltib --batch"
+        }
+    }
+    cycle
+    connect
+    boot
+    return 1
+}
+
+# setup logging and some variables
+set scriptname [file rootname [file tail $argv0]]
+set scriptadir [file join [pwd] [file dir $argv0]]
+
+set log_user      1
+set interact      1
+set commentary    0
+set reboot        1
+set rebuild       1
+set ltibdir       [file dir $scriptadir]
+set logdir        $ltibdir/tmp
+set rootpath      $ltibdir/rootfs
+set newkern       $rootpath/boot/bootable_kernel
+set board         [file tail $ltibdir]
+set controller    local
+set localtty      /dev/ttyS0
+set boot_cmd_file $scriptadir/u-boot_cmds_nfs.default
+
+set tftp_path     /ltib
+set serverip      192.168.0.9
+set ipaddr        192.168.0.254
+set netmask       255.255.255.0
+set gatewayip     ""
+set hostname      ltib
+set netdev        eth0
+set consoledev    ttyS0
+set baud          115200
+set loadkernaddr  0x800000
+set loaddtbaddr   0x9F0000
+set loadramaddr   0xB00000
+set bootfile      $tftp_path/bootable_kernel.$board
+set dtbfile       $tftp_path/dtb.$board
+set rdfile        $tftp_path/rd.$board
+
+# override the basic defaults if present
+setup_vars
+
+if ![info exists logdir] {
+    set i 0
+    while 1 {
+        set logdir $scriptadir/$board/logs/[exec date +%Y%m%d]
+        set logdir [format "$logdir-%02d" $i]
+        puts "try $logdir"
+        if ![file isdirectory $logdir] {
+            break
+        }
+        incr i
+    }
+}
+exec mkdir -p $logdir
+log_file -a -noappend $logdir/$scriptname.txt
+

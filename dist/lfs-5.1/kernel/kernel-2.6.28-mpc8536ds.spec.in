@@ -1,0 +1,158 @@
+# Template = kernel-common.tmpl
+
+%define pfx /opt/freescale/rootfs/%{_target_cpu}
+%define dversion 2.6.28
+%define pkg_name linux
+
+Summary         : Linux kernel (core of the Linux operating system)
+Name            : kernel
+Version         : 2.6.28
+Release         : 1
+License         : GPL
+Vendor          : Kernel.org + freescale patches
+Packager        : Vivienne Li
+Group           : System Environment/Kernel
+Source          : %{pkg_name}-%{dversion}.tar.bz2
+Patch0          : 0001-Non-Freescale-This-is-a-combination-of-38-commits.patch
+Patch1          : 0002-Freescale-powerpc-Add-MSR-CE-DE-to-the-MSR-bits.patch
+Patch2          : 0003-Non-Freescale-powerpc-Fix-ppc32-mm_struct-CPU-tra.patch
+Patch3          : 0004-Freescale-This-is-a-combination-of-3-commits.patch
+Patch4          : 0003-Non-Freescale-powerpc-Allow-the-max-stack-trace-d.patch
+Patch5          : 0004-Freescale-powerpc-Add-sync_-_for_-to-dma_ops.patch
+Patch6          : 0005-Non-Freescale-This-is-a-combination-of-10-commits.patch
+Patch7          : 0006-Freescale-This-is-a-combination-of-9-commits.patch
+Patch8          : 0007-Non-Freescale-This-is-a-combination-of-3-commits.patch
+Patch9          : 0008-Freescale-This-is-a-combination-of-3-commits.patch
+Patch10         : 0009-Non-Freescale-This-is-a-combination-of-5-commits.patch
+Patch11         : 0010-Freescale-powerpc-85xx-Fix-compile-issues-with-mp.patch
+Patch12         : 0011-Non-Freescale-This-is-a-combination-of-4-commits.patch
+Patch13         : 0012-Freescale-powerpc-Fix-CONFIG_PPC_NEED_DMA_SYNC_O.patch
+Patch14         : 0013-Non-Freescale-This-is-a-combination-of-36-commits.patch
+Patch15         : 0014-Freescale-powerpc-bootwrapper-Use-the-child-bus.patch
+Patch16         : 0015-Non-Freescale-This-is-a-combination-of-37-commits.patch
+Patch17         : 0016-Freescale-This-is-a-combination-of-3-commits.patch
+Patch18         : 0017-Non-Freescale-This-is-a-combination-of-two-commits.patch
+Patch19         : 0018-Freescale-This-is-a-combination-of-two-commits.patch
+Patch20         : 0019-Non-Freescale-printk-add-pM-format-specifier-for.patch
+Patch21         : 0022-Non-Freescale-gianfar-Backport-gianfar-specific-c.patch
+Patch22         : 0023-Freescale-This-is-a-combination-of-21-commits.patch
+Patch23         : 0021-Non-Freescale-This-is-a-combination-of-98-commits.patch
+Patch24         : 0001-powerpc-85xx-Fix-typo-in-mpc8572ds-dts.patch
+Patch25         : 0016-FSL-ONLY-Use-mbar-1-instead-of-eieio-for-e500.patch
+Patch26          : 0017-SKB-recycling-version-1-1-4.patch
+Patch27          : 0004--gianfar-Fastroute-patch.patch
+Patch28          : 0005-Add-doc-dts-bindings-mchp-adc.txt-and-add-ADC-node.patch
+Patch29          : 0006-Add-support-for-getting-device-platform-data-to-I2C.patch
+Patch30          : 0007-I2C-get-the-platform-data-of-MCP3021-into-its-I2C-d.patch
+Patch31         : 0008-I2C-Add-I2C-driver-for-MCP3021-an-ADC-chip-from-Mi.patch
+Patch32          : 0009-rtc-Preliminary-support-for-DS3232-RTC.patch
+Patch33         : 0001-Add-Freescale-SEC23DRV-package.patch
+Patch34         : 0053-FSL-ONLY-add-support-to-enable-SEC23DRV.patch
+Patch35         : 0012--FSL-ONLY-Update-SEC23DRV-to-work-with-Linux-kernel.patch
+Patch36         : 0013--FSL-ONLY-t23xDrv-Fix-compiling-error.patch
+Patch37         : 0014-eSPI-Add-MPC8536-eSPI-board-support.patch
+Patch38         : 0015-eSPI-Add-eSPI-controller-driver.patch
+Patch39         : 0016-eSPI-Add-SPI-flash-memory-support-for-MPC8536DS.patch
+Patch40         : 0017-Add-the-power-management-dts.patch
+Patch41         : 0018-Add-the-sleep-deep-sleep-support-for-8536.patch
+Patch42         : 0019-GPIO-Wake-up-testcase.patch
+Patch43         : 0020-Add-the-mpic-timer-support.patch
+Patch44         : 0021-Add-cpufreq-support-for-8536.patch
+Patch45         : 0022-Add-JOG-support-for-8536.patch
+Patch46         : 0023-Wake-on-LAN-user-defined-packet-dts-node-property.patch
+Patch47         : 0024-Add-the-Wake-on-LAN-user-defined-packet-support-2.patch
+Patch48         : 0025-Add-the-PM-support-for-SATA-driver.patch
+Patch49         : 0026-Do-not-add-pci-bridge-when-configured-as-endpoint-on.patch
+Patch50         : 0027-Allow-seting-the-EP-bit-in-the-mpic-destination-reg.patch
+Patch51         : 0028-Do-not-hide-resource-for-pci-pcie-when-configured-as.patch
+Patch52         : 0029-dts-binding-doc-for-powerpc-message-interrupt.patch
+Patch53         : 0030-Add-message-interrupt-module-driver-for-powerpc-mpic.patch
+Patch54         : 0031-Add-message-interrupt-support-for-8536DS-board.patch
+Patch55         : 0032-Ethernet-Demo-Driver-for-85xx-PCI-Agent-EP.patch
+Patch56         : 0033-Enable-X700-and-X800-video-card-in-kernel.patch
+Patch57         : 0034-PowerPC-85xx-Add-localbus-node-in-MPC8536ds-dts-fil.patch
+Patch58         : 0035-PIXIS-add-board-control-FPGA-support-on-MPC8536DS.patch
+Patch59         : 0036-PIXIS-add-power-monitor-support-on-sleep-mode.patch
+Patch60         : 0037-Enable-IEEE-1588-function-on-MPC8536DS-board-2.patch
+Patch61         : 0038-dts-move-the-timer-node-out-of-the-mpic-node.patch
+Patch62         : 0039-Perf-performance-improvement-for-SATA.patch
+Patch63         : 0040-disable-the-IEEE-1588-function-from-dts-tree.patch
+Patch64         : 0041-85xx-Enable-the-eSDHC-driver-on-8536DS-board.patch 
+Patch65		: 0001-Make-the-write-protect-bit-is-consitent-withe-the-SD.patch
+
+BuildRoot       : %{_tmppath}/%{name}
+Prefix          : %{pfx}
+
+%Description
+%{summary}
+
+From kernel.org plus Freescale patches
+
+%Prep
+%setup -n %{pkg_name}-%{dversion}
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
+%patch9 -p1
+%patch10 -p1
+%patch11 -p1
+%patch12 -p1
+%patch13 -p1
+%patch14 -p1
+%patch15 -p1
+%patch16 -p1
+%patch17 -p1
+%patch18 -p1
+%patch19 -p1
+%patch20 -p1
+%patch21 -p1
+%patch22 -p1
+%patch23 -p1
+%patch24 -p1
+%patch25 -p1
+%patch26 -p1
+%patch27 -p1
+%patch28 -p1
+%patch29 -p1
+%patch30 -p1
+%patch31 -p1
+%patch32 -p1
+%patch33 -p1
+%patch34 -p1
+%patch35 -p1
+%patch36 -p1
+%patch37 -p1
+%patch38 -p1
+%patch39 -p1
+%patch40 -p1
+%patch41 -p1
+%patch42 -p1
+%patch43 -p1
+%patch44 -p1
+%patch45 -p1
+%patch46 -p1
+%patch47 -p1
+%patch48 -p1
+%patch49 -p1
+%patch50 -p1
+%patch51 -p1
+%patch52 -p1
+%patch53 -p1
+%patch54 -p1
+%patch55 -p1
+%patch56 -p1
+%patch57 -p1
+%patch58 -p1
+%patch59 -p1
+%patch60 -p1
+%patch61 -p1
+%patch62 -p1
+%patch63 -p1
+%patch64 -p1
+%patch65 -p1

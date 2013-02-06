@@ -1,0 +1,64 @@
+# Template = kernel-common.tmpl
+
+%define pfx /opt/freescale/rootfs/%{_target_cpu}
+%define dversion 2.6.29
+%define pkg_name linux
+
+Summary         : Linux kernel (core of the Linux operating system)
+Name            : kernel
+Version         : 2.6.29
+Release         : 1
+License         : GPL
+Vendor          : Kernel.org + freescale patches
+Packager        : Dipen Dudhat
+Group           : System Environment/Kernel
+Source          : %{pkg_name}-%{dversion}.tar.bz2
+Patch0          : kernel-2.6.29-Fix-for-Highmem-build-failures.patch
+Patch1          : kernel-2.6.29-P2020RDB-Platform.patch
+Patch2          : kernel-2.6.29-P2020RDB-add-esdhc-support-v2.patch
+Patch3          : kernel-2.6.29-P2020-eSDHC-PIO.patch
+Patch4          : kernel-2.6.29-P10XX_20XXRDB-defconfig.patch
+Patch5          : kernel-2.6.29-FSL-M25P80-Driver.patch
+Patch6          : kernel-2.6.29-FSL-ESPI-Controller-Driver.patch
+Patch7          : kernel-2.6.29-FSL-eSPI-Driver-backported-to-2.6.29.patch
+Patch8          : kernel-2.6.29-p10xx_20xxrdb_defconf-eSPI-and-MTD-Support.patch
+Patch9          : kernel-2.6.29-Partitions-for-P2020RDB-MTD-Device.patch
+Patch10         : kernel-2.6.29-P2020RDB-dts-change-for-mdio.patch
+Patch11         : 0081-FSL-ONLY-powerpc-This-patch-adds-Freescale-CodeWa.patch
+Patch12         : kernel-2.6.29-NOR-partitions-for-larger-JFFS2.patch
+Patch13         : kernel-2.6.29-P2020RDB-AMP-support-added-for-P2020RDB.patch
+Patch14         : kernel-2.6.29-SKB-recycling-version-1.1.4-v2.patch
+Patch15         : kernel-2.6.29-p10xx_20xx-SMP-support-defconfig.patch
+Patch16         : kernel-2.6.29-P2020RDB-SDMMC-crash-non-DMA.patch
+Patch17         : kernel-2.6.29-P2020RDB-suppress-data-int-print-sdhc-v2.patch
+Patch18         : kernel-2.6.29-P2020RDB-CIFS-and-Bridging-defs-P2020RDB.patch
+
+BuildRoot       : %{_tmppath}/%{name}
+Prefix          : %{pfx}
+
+%Description
+%{summary}
+
+From kernel.org plus Freescale patches
+
+%Prep
+%setup -n %{pkg_name}-%{dversion}
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
+%patch9 -p1
+%patch10 -p1
+%patch11 -p1
+%patch12 -p1
+%patch13 -p1
+%patch14 -p1
+%patch15 -p1
+%patch16 -p1
+%patch17 -p1
+%patch18 -p1
